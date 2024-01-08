@@ -31,25 +31,40 @@ class TestBaseModel(unittest.TestCase):
         self.assertTrue(isinstance(base_model_2.id, str))
 
     def test_created_at(self):
+        '''
+        Tests the created_at public instance
+        '''
         base_model = BaseModel()
         self.assertIsInstance(base_model.created_at, datetime)
 
     def test_updated_at(self):
+        '''
+        Tests the updated_at public instance
+        '''
         base_model = BaseModel()
         self.assertIsInstance(base_model.updated_at, datetime)
 
     def test_str_method(self):
+        '''
+        Tests the string representation of the object
+        '''
         base_model = BaseModel()
         expected_str = "[BaseModel] ({}) {}".format(base_model.id, base_model.__dict__)
         self.assertEqual(str(base_model), expected_str)
 
     def test_save_method(self):
+        '''
+        Tests the save() public method
+        '''
         base_model = BaseModel()
         old_updated_at = base_model.updated_at
         base_model.save()
         self.assertNotEqual(base_model.updated_at, old_updated_at)
 
     def test_to_dict_method(self):
+        '''
+        Tests the to_dict() public method
+        '''
         base_model = BaseModel()
         base_model_dict = base_model.to_dict()
         self.assertIsInstance(base_model_dict, dict)
