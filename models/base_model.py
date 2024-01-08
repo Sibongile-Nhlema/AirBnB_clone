@@ -19,7 +19,7 @@ class BaseModel:
         '''
         Return a string representation
         '''
-        return "[{}] ({}) {}".format(BaseModel.__class__.__name__,
+        return "[{}] ({}) {}".format(__class__.__name__,
                                      self.id, self.__dict__)
 
     def save(self):
