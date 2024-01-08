@@ -3,6 +3,7 @@
 
 import json
 import os
+from models.base_model import BaseModeli
 
 
 class FileStorage:
@@ -19,7 +20,7 @@ class FileStorage:
         - save(self): serializes __objects to JSON file
         - reload(self): deserializes JSON file to __objects
     '''
-    __file_path = "file.json"
+    __file_path = "storage_file.json"
     __objects = {}
 
     def all(self):
@@ -43,7 +44,11 @@ class FileStorage:
         '''
         Saves serializes __objects to the JSON file into __file_path
         '''
-        serialized_objs = FileStorage.__objects
+        serialized_objs = {}
+        for obj in FileStorage.__objects:
+            serialized_objs[obj] = FileStorage.__objects[obj].to_dict()
+        with open(FileStorage.__file_path, "w") as storage_file:
+            json.dumpt(serialized_objs, storage_file)
 
     def reload(self):
         '''
@@ -52,4 +57,9 @@ class FileStorage:
         Populate the __objects dictionary with the deserialized instances.
         If the JSON file does not exist, no exception will be raised.
         '''
-        if os.path.exists(self.__file_path):
+        try:
+            with open(FileStorage.__file_path) as storage_file:
+                serialized_objs = json.load(storage_file)
+                self.__objects = {eval(obj["__class__"])(**obj) for obj in serialized_objs.values()}
+        except FileNotFoundError:
+            return
