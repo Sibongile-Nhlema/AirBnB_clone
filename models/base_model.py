@@ -19,14 +19,14 @@ class BaseModel:
         Constructor: Initializes an instance of the BaseModel class.
 
         Args:
-            args (str) - Unused
-            kwargs (str) - Key/Value arguments
+            args (any) - Unused
+            kwargs (dict) - Key/Value arguments
         '''
         if kwargs:
             for key, value in kwargs.items():
                 if key != "__class__":
                     if key == "created_at" or key == "updated_at":
-                        value = datetime.fromisoformat(value)
+                        value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
                     setattr(self, key, value)
         else:
             self.id = str(uuid.uuid4())

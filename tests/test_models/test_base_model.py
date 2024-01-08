@@ -2,7 +2,7 @@
 ''' These Unittests are for the BaseModel Class
 
     Unittest classes:
-        test_uuid
+        TestBaseModel
 '''
 
 import unittest
@@ -14,6 +14,12 @@ class TestBaseModel(unittest.TestCase):
     '''
     Tests all cases for the BaseModel class
     '''
+    def test_instantiation(self):
+        '''
+        Tests instantiation of the instance
+        '''
+        pass
+
     def test_uuid(self):
         '''
         Tests the uniqueness  and format of each id
@@ -74,6 +80,21 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(base_model_dict['created_at'], str)
         self.assertIn('updated_at', base_model_dict)
         self.assertIsInstance(base_model_dict['updated_at'], str)
+
+    def test_init_kwargs(self):
+        '''
+        Tests the kwargs in the constructor (__init__ method)
+        '''
+        base_model = BaseModel(name='Plankton', age=32)
+
+        # Test whether the attributes were updated correctly
+        self.assertEqual(base_model.name, 'Plankton')
+        self.assertEqual(base_model.age, 32)
+
+        # Test whether the other attributes remain unchanged
+        self.assertEqual(base_model.id, BaseModel().id)
+        self.assertEqual(base_model.created_at, BaseModel().created_at)
+        self.assertEqual(base_model.updated_at, BaseModel().updated_at)
 
 
 if __name__ == '__main__':
