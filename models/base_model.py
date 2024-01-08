@@ -2,8 +2,10 @@
 ''' This is the module for the BaseModel Class '''
 
 import uuid
+import models
 from datetime import datetime
-from engine.file_storage import storage
+
+models.storage = storage
 
 class BaseModel:
     ''' 
