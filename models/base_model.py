@@ -6,20 +6,40 @@ from datetime import datetime
 
 
 class BaseModel:
-    ''' This class deinfes all common attributes for other classes '''
-    def __init__(self):
+    ''' 
+    This class deinfes all common attributes for other classes
+
+    Public Instance Attributes:
+        id (str): The unique identifier for the instance.
+        created_at (datetime): The timestamp when the instance was created.
+        updated_at (datetime): The timestamp when the instance was last updated.
+    '''
+    def __init__(self, *args, **kwargs):
         '''
-        Constructor
+        Constructor: Initializes an instance of the BaseModel class.
+
+        Args:
+            args (str) - Unused
+            kwargs (str) - Key/Value arguments
         '''
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+        if kwargs:
+            for key, value in kwargs.items():
+                if key != "__class__":
+                    if key == "created_at" or key == "updated_at":
+                        value = datetime.fromisoformat(value)
+                    setattr(self, key, value)
+        else:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
 
     def __str__(self):
         '''
-        Return a string representation
+        Return:
+            A string representation of the instance in the format:
+            "[ClassName] (uuid) {key1: value1, ...}"
         '''
-        return "[{}] ({}) {}".format(__class__.__name__,
+        return "[{}] ({}) {}".format((self.__class__.__name__),
                                      self.id, self.__dict__)
 
     def save(self):
@@ -27,11 +47,12 @@ class BaseModel:
         Updates the public instance attribute
         'updated_at' with current datetime
         '''
-        self.updated_at = self.updated_at.now()
+        self.updated_at = datetime.now()
 
     def to_dict(self):
         '''
-        Returns a dict containing all key/values of __dict__ of that instance
+        Return:
+            A dict containing all key/values of __dict__ of the instance.
         '''
         self.created_at = self.created_at.isoformat()
         self.updated_at = self.updated_at.isoformat()
