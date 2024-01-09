@@ -77,8 +77,8 @@ class HBNBCommand(cmd.Cmd):
 
         Usage: create <class>
 
-        if class name is missing, it prints '** class name missing **'
-        if class name does not exist, prints '** class doesn't exist **'
+        Args:
+            line (str): The input line containing the class name
         '''
         args_line = parse(line)
         arg_1 = args_line[0]
@@ -97,9 +97,8 @@ class HBNBCommand(cmd.Cmd):
 
         Usage: show <class> <id> or <class>.show(<id>)
 
-        if class name is missing, it prints '** class name missing **'
-        if class name does not exist, prints '** class doesn't exist **'
-        if the id is missing, prints '** instance id missing **'
+        Args:
+            line (str): The input line containing the class name
         '''
         args_line = parse(line)
         all_instances = storage.all()
@@ -121,11 +120,8 @@ class HBNBCommand(cmd.Cmd):
 
         Usage: destroy <class> <id> or <class>.destroy(<id>)
 
-        If the class name is missing, print ** class name missing **
-        If the class name doesn’t exist, print ** class doesn't exist **
-        If the id is missing, print ** instance id missing **
-        If the instance of the class name doesn’t exist for the id,
-        print ** no instance found **
+        Args:
+            line (str): The input line containing the class name
         '''
         args_line = parse(line)
         all_instances = storage.all()
@@ -148,6 +144,9 @@ class HBNBCommand(cmd.Cmd):
         not on class name
 
         Usage: show <class> <id> or <class>.show(<id>)
+
+        Args:
+            line (str): The input line containing the class name
         '''
         ar_line = parse(line)
         if len(ar_line) > 0 and ar_line[0] not in HBNBCommand.__classes:
@@ -165,6 +164,9 @@ class HBNBCommand(cmd.Cmd):
         by adding or updating attribute
 
         Usage: update <class name> <id> <attribute name> "<attribute value>"
+
+        Args:
+            line (str): The input line containing the class name
         '''
         # To do: implement this function
         pass
