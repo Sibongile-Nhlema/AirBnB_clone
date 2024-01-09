@@ -3,7 +3,7 @@
 
 import json
 import os
-from models.base_model import BaseModeli
+from models.base_model import BaseModel
 
 
 class FileStorage:
@@ -35,20 +35,20 @@ class FileStorage:
             format: <obj class name>.id
 
         Args:
-            obj (dict): dictionary of key/value pairs 
+            obj (dict): dictionary of key/value pairs
         '''
         key = "{}.{}".format(obj.__class__.__name__, obj.id)
-        FileStorage.__object[key] = obj
+        FileStorage.__objects[key] = obj
 
     def save(self):
         '''
         Saves serializes __objects to the JSON file into __file_path
         '''
-        serialized_objs = {}
-        for obj in FileStorage.__objects:
-            serialized_objs[obj] = FileStorage.__objects[obj].to_dict()
-        with open(FileStorage.__file_path, "w") as storage_file:
-            json.dumpt(serialized_objs, storage_file)
+        obj_dict = FileStorage.__objects
+        serialized_objs = dict((obj, obj_dict[obj].to_dict())
+                               for obj in obj_dict.keys())
+        with open(FileStorage.__file_path, "w") as f:
+            json.dump(serialized_objs, f)
 
     def reload(self):
         '''
@@ -58,8 +58,9 @@ class FileStorage:
         If the JSON file does not exist, no exception will be raised.
         '''
         try:
-            with open(FileStorage.__file_path) as storage_file:
-                serialized_objs = json.load(storage_file)
-                self.__objects = {eval(obj["__class__"])(**obj) for obj in serialized_objs.values()}
+            with open(FileStorage.__file_path) as f:
+                serialized_objs = json.load(f)
+                self.__objects = [self.new(eval(obj["__class__"])
+                                  (**obj)) for obj in serialized_objs.values()]
         except FileNotFoundError:
             return
