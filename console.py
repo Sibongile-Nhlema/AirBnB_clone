@@ -7,6 +7,7 @@ from shlex import split
 from models import storage
 from models.base_model import BaseModel
 
+
 def parse(line):
     '''
     Parses the line and returns the parsed elements
@@ -109,12 +110,10 @@ class HBNBCommand(cmd.Cmd):
         elif len(args_line) < 2:
             print("** instance id missing **")
         elif "{}.{}".format(args_line[0], args_line[1]) not in all_instances:
-            # look for key/value pair in storage
             print("** no instance found **")
         else:
             instance_key = "{}.{}".format(args_line[0], args_line[1])
             print(all_instances[instance_key])
-
 
     def do_destroy(self, line):
         '''
@@ -123,7 +122,7 @@ class HBNBCommand(cmd.Cmd):
         Usage: destroy <class> <id> or <class>.destroy(<id>)
 
         If the class name is missing, print ** class name missing **
-        If the class name doesn’t exist, print ** class doesn't exist ** 
+        If the class name doesn’t exist, print ** class doesn't exist **
         If the id is missing, print ** instance id missing **
         If the instance of the class name doesn’t exist for the id,
         print ** no instance found **
@@ -150,18 +149,24 @@ class HBNBCommand(cmd.Cmd):
 
         Usage: show <class> <id> or <class>.show(<id>)
         '''
-        args_line = parse(line)
-        if len(args_line) > 0 and args_line[0] not in HBNBCommand.__classes:
+        ar_line = parse(line)
+        if len(ar_line) > 0 and ar_line[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
         else:
             object_list = []
             for obj in storage.all().values():
-                if len(args_line) == 0 or args_line[0] == obj.__class__.__name__:
+                if len(ar_line) == 0 or ar_line[0] == obj.__class__.__name__:
                     object_list.append(obj.__str__())
             print(object_list)
 
+    def do_update(self, line):
+        '''
+        Updates an instance based on the class name and id
+        by adding or updating attribute
 
-    def do_update(self):
+        Usage: update <class name> <id> <attribute name> "<attribute value>"
+        '''
+        # To do: implement this function
         pass
 
 
