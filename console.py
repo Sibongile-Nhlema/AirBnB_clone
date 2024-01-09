@@ -6,6 +6,7 @@ import cmd
 from shlex import split
 from models import storage
 from models.base_model import BaseModel
+from models.user import User
 
 
 def parse(line):
@@ -46,7 +47,7 @@ class HBNBCommand(cmd.Cmd):
     Does NOT execute when imported
     '''
     prompt = "(hbnb) "
-    __classes = {"BaseModel"}
+    __classes = {"BaseModel", "User"}
 
     def do_quit(self, line):
         '''
@@ -62,6 +63,15 @@ class HBNBCommand(cmd.Cmd):
 
     # To do: implement the custom help method
     def help_(self, line):
+        '''
+        Displays the help message for a specific command
+        or lists all available commands
+
+        Usage: help or help [command]
+
+        Args:
+            line (str): The input line containing the command name (optional).
+        '''
         pass
 
     def emptyline(self):
@@ -169,7 +179,19 @@ class HBNBCommand(cmd.Cmd):
             line (str): The input line containing the class name
         '''
         # To do: implement this function
-        pass
+        args_line = parse(line)
+        all_instances = storage.all()
+
+        if not args_line:
+            print("** class name missing **")
+        elif args_line[0] not in HBNBCommand.__classes:
+            print("** class doesn't exist **")
+        elif len(args_line) < 2:
+            print("** instance id missing **")
+        elif "{}.{}".format(args_line[0], args_line[1]) not in all_instances:
+            print("** no instance found **")
+        else:
+            pass
 
 
 if __name__ == '__main__':
