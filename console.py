@@ -61,16 +61,6 @@ class HBNBCommand(cmd.Cmd):
             "Place",
             "Review"
             }
-    command_dict = {
-            "help": 'List available commands with "help" or detailed help with "help cmd".',
-            "quit": "Quit command to exit the program",
-            "EOF": "EOF command cleanly quits/exits the program",
-            "create": "Creates a new instance of BaseModel, saves it to a JSON file and prints the id.\nUsage: create <class>",
-            "show": "Prints the string reprsentation of an instance based on the class name and id.\nUsage: show <class> <id> or <class>.show(<id>)",
-            "destroy": "Deletes an instance based on the class name and id.\nUsage: destroy <class> <id> or <class>.destroy(<id>)",
-            "all": "Prints the string representation of all instances based or not on class name.\nUsage: show <class> <id> or <class>.show(<id>)",
-            "update": "Updates an instance based on the class name and id by adding or updating attribute.\nUsage: update <class name> <id> <attribute name> '<attribute value>'"
-            } 
 
     def do_quit(self, line):
         '''
@@ -95,14 +85,18 @@ class HBNBCommand(cmd.Cmd):
         Args:
             line (str): The input line containing the command name (optional).
         '''
-        if not line:
-            for command, message in HBNBCommand.command_dict.items():
-                print(f"{command}: {message}")
-        else:
-            if line in HBNBCommand.command_dict:
-                print(HBNBCommand.command_dict[line])
-            else:
-                print("Command not found")
+        command_dict = {
+                "help": 'List available commands with "help" or detailed help with "help cmd".',
+                "quit": "Quit command to exit the program",
+                "EOF": "EOF command cleanly quits/exits the program",
+                 "create": "Creates a new instance of BaseModel, saves it to a JSON file and prints the id.\nUsage: create <class>",
+                 "show": "Prints the string representation of an instance based on the class name and id.\nUsage: show <class> <id> or <class>.show(<id>)",
+                 "destroy": "Deletes an instance based on the class name and id.\nUsage: destroy <class> <id> or <class>.destroy(<id>)",
+                 "all": "Prints the string representation of all instances based or not on class name.\nUsage: show <class> <id> or <class>.show(<id>)",
+                 "update": "Updates an instance based on the class name and id by adding or updating attribute.\nUsage: update <class name> <id> <attribute name> '<attribute value>'"
+                 }
+        if line in command_dict:
+            print(command_dict[line])
 
     def emptyline(self):
         '''
