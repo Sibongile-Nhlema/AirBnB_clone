@@ -74,29 +74,42 @@ class HBNBCommand(cmd.Cmd):
         '''
         return True
 
-    # To do: implement the custom help method
-    def do_help(self, line):
-        '''
-        Displays the help message for a specific command
-        or lists all available commands
+    def help_quit(self):
+        ''' Documentation for the quit command '''
+        print("Quit command to exit the program\n")
 
-        Usage: help or help [command]
+    def help_EOF(self):
+        ''' Documentation for the EOF command '''
+        print("EOF command cleanly quits/exits the program\n")
 
-        Args:
-            line (str): The input line containing the command name (optional).
-        '''
-        command_dict = {
-                "help": 'List available commands with "help" or detailed help with "help cmd".',
-                "quit": "Quit command to exit the program",
-                "EOF": "EOF command cleanly quits/exits the program",
-                 "create": "Creates a new instance of BaseModel, saves it to a JSON file and prints the id.\nUsage: create <class>",
-                 "show": "Prints the string representation of an instance based on the class name and id.\nUsage: show <class> <id> or <class>.show(<id>)",
-                 "destroy": "Deletes an instance based on the class name and id.\nUsage: destroy <class> <id> or <class>.destroy(<id>)",
-                 "all": "Prints the string representation of all instances based or not on class name.\nUsage: show <class> <id> or <class>.show(<id>)",
-                 "update": "Updates an instance based on the class name and id by adding or updating attribute.\nUsage: update <class name> <id> <attribute name> '<attribute value>'"
-                 }
-        if line in command_dict:
-            print(command_dict[line])
+    def help_create(self):
+        ''' Documentation for the create command '''
+        print("Prints the string representation of an instance"
+              " based on the class name and id. \nUsage: create <class>\n")
+
+    def help_show(self):
+        ''' Documentation for the show command '''
+        print("Prints the string representation of an instance"
+              "based on the class name and id."
+              "\nUsage: show <class> <id> or <class>.show(<id>)\n")
+
+    def help_destory(self):
+        ''' Documentation for the destory command '''
+        print("Deletes an instance based on the class name and id."
+              "\nUsage: destroy <class> <id> or <class>.destroy(<id>)\n")
+
+    def help_all(self):
+        ''' Documentation for the all command '''
+        print("Prints the string representation of all instances"
+              "based or not on class name."
+              "\nUsage: show <class> <id> or <class>.show(<id>)\n")
+
+    def help_update(self):
+        ''' Documentation for the update command '''
+        print("Updates an instance based on the class name"
+              "and id by adding or updating attribute."
+              "\nUsage: update <class name> <id> <attribute name> "
+              "'<attribute value>'\n")
 
     def emptyline(self):
         '''
