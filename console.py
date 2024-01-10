@@ -202,7 +202,6 @@ class HBNBCommand(cmd.Cmd):
         Args:
             line (str): The input line containing the class name
         '''
-        # To do: implement this function
         args_line = parse(line)
         all_instances = storage.all()
 
