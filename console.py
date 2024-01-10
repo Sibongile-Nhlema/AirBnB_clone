@@ -210,12 +210,27 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         elif args_line[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
-        elif len(args_line) < 2:
+        elif len(args_line) == 1:
             print("** instance id missing **")
         elif "{}.{}".format(args_line[0], args_line[1]) not in all_instances:
             print("** no instance found **")
+        elif len(args_line) == 2:
+            print("** attribute name missing **")
+        elif len(args_line) == 3:
+            print("** value missing **")
         else:
-            pass
+            instance_key = "{}.{}".format(args_line[0], args_line[1])
+            instance = all_instances[instance_key]
+            attribute_name = args_line[2]
+            attribute_value = args_line[3]
+
+            if not attribute_name:
+                print("** attribute name missing **")
+            elif not attribute_value:
+                print("** value missing **")
+            else:
+                setattr(instance, attribute_name, attribute_value)
+                storage.save()
 
 
 if __name__ == '__main__':
