@@ -15,6 +15,12 @@ from models.review import Review
 
 
 def is_float(string):
+    """
+    Checks if a string is a floating point number.
+
+    string (str): A string
+    """
+
     if string.replace(".", "").isnumeric():
         return True
     else:
