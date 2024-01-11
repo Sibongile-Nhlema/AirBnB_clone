@@ -27,6 +27,24 @@ def is_float(string):
     else:
         return False
 
+def remove_quotes(string):
+    """
+    Removes quotes surrounding a string.
+
+    string (str): A string
+    """
+
+    if string:
+        if (
+                string.startswith('"')
+                and string.endswith('"')):
+            string = string.split('"')[1].strip()
+        elif (
+                string.startswith("'")
+                and string.endswith("'")):
+            string = string.split("'")[1].strip()
+
+    return string
 
 class HBNBCommand(cmd.Cmd):
     """
@@ -272,17 +290,8 @@ class HBNBCommand(cmd.Cmd):
         attr_name = args[2] if len(args) > 2 else None
         attr_value = args[3] if len(args) > 3 else None
 
-        if attr_name and attr_name.startswith('"') and attr_name.endswith('"'):
-            attr_name = attr_name.split('"')[1]
-        if attr_name and attr_name.startswith("'") and attr_name.endswith("'"):
-            attr_name = attr_name.split("'")[1]
-        if (attr_value and attr_value.startswith('"')
-                and attr_value.endswith('"')):
-            attr_value = attr_value.split('"')[1]
-        if (
-                attr_value and attr_value.startswith("'")
-                and attr_value.endswith("'")):
-            attr_value = attr_value.split("'")[1]
+        attr_name = remove_quotes(attr_name)
+        attr_value = remove_quotes(attr_value)
 
         if attr_value and attr_value.isdigit():
             attr_value = int(attr_value)
@@ -334,15 +343,7 @@ class HBNBCommand(cmd.Cmd):
         match_all = re.match(r"^(.+)\.(.+)\((.*)\)$", line)
         instance_id = match_all.group(3)
 
-        if instance_id:
-            if (
-                    instance_id.startswith('"')
-                    and instance_id.endswith('"')):
-                instance_id = instance_id.split('"')[1]
-            elif (
-                    instance_id.startswith("'")
-                    and instance_id.endswith("'")):
-                instance_id = instance_id.split("'")[1]
+        instance_id = remove_quotes(instance_id)
 
         if match_all:
             line = match_all.group(1)
