@@ -76,15 +76,22 @@ class HBNBCommand(cmd.Cmd):
         new_list = line.split(".")
         command_dict = {
                 "all()": "self.do_all(line)", 
-                "count()": "self.do_count(new_list[0])"
+                "count()": "self.do_count(line)",
+                "show()": "self.do_show(line)"
                 }
 
         if new_list[0] not in HBNBCommand.__classes or len(new_list) == 1:
             print("*** Unknown syntax: {}".format(line))
             return False
         else:
-            if new_list[0] in HBNBCommand.__classes and new_list[1] in command_dict:
-                result = (eval(command_dict[new_list[1]]))
+            pattern = r'show\("[\w-]+"\)'
+            matched = re.search(pattern, new_list[1])
+            if matched:
+                print("hi")
+                print('Pattern found:', matched.group())
+                eval(command_dict["show()"])
+            elif new_list[0] in HBNBCommand.__classes and new_list[1] in command_dict:
+                eval(command_dict[new_list[1]])
             else:
                 print("*** Unknown syntax: {}".format(line))
 
@@ -179,6 +186,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         elif args_line[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
+            print(line)
         elif len(args_line) < 2:
             print("** instance id missing **")
         elif "{}.{}".format(args_line[0], args_line[1]) not in all_instances:
@@ -222,18 +230,21 @@ class HBNBCommand(cmd.Cmd):
             line (str): The input line containing the class name
         '''
         ar_line = parse(line)
+
+        # handle <class name>.all()
         if "." in ar_line[0]:
-            new_list = line.split(".")
-            class_name = new_list[0]
+            class_name = line.split(".")[0]
             object_list = []
+
             for obj in storage.all().values():
                  if class_name == obj.__class__.__name__:
-                     instance = obj.__str__()
-                     instance = re.sub(r'"', '', instance)
-                     object_list.append(instance)
+                     object_list.append(obj.__str__())
             print(str(object_list).replace('"', ""))
+
+        # handle all <class name>
         elif len(ar_line) > 0 and ar_line[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
+
         else:
             object_list = []
             for obj in storage.all().values():
@@ -279,6 +290,16 @@ class HBNBCommand(cmd.Cmd):
             else:
                 setattr(instance, attribute_name, attribute_value)
                 storage.save()
+
+    def do_count(self, line):
+        '''Counts the number of instances of a class '''
+        class_name = line.split(".")[0]
+        instance_count = 0
+        for obj in storage.all().values():
+            if class_name == obj.__class__.__name__:
+                instance_count += 1
+        # should the result be returned instead??
+        print(instance_count)
 
 
 if __name__ == '__main__':
