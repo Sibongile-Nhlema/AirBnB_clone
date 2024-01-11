@@ -4,6 +4,7 @@ This module defines the entry point of the command interpreter.
 """
 
 import cmd
+import re
 from models.base_model import BaseModel
 from models import storage
 from models.user import User
@@ -161,6 +162,52 @@ class HBNBCommand(cmd.Cmd):
             str_representations = [f'"{str(obj)}"' for obj in objects.values()]
             print('[' + ', '.join(str_representations) + ']')
 
+    def dot_notation_all(self, line):
+        """
+        Prints string representation of all instances,
+        based or not on the class name.
+
+        Args:
+        - line (str): The command line
+        """
+
+        if line:
+            if line not in HBNBCommand.__classes:
+                print("** class doesn't exist **")
+            else:
+                objects = storage.all()
+                str_representations = []
+                for key, obj in objects.items():
+                    if key.split('.')[0] == line:
+                        str_representations.append(str(obj))
+                print(
+                    '[' +
+                    ', '.join(f'{str_repr}'
+                              for str_repr in str_representations)
+                    + ']'
+                    )
+        else:
+            objects = storage.all()
+            str_representations = [f'{str(obj)}' for obj in objects.values()]
+            print('[' + ', '.join(str_representations) + ']')
+
+    def dot_notation_count(self, line):
+        """
+        Retrieves the number of instances of a class.
+
+        Args:
+        - line (str): The command line
+        """
+
+        count = 0
+        objects = storage.all()
+
+        for key in objects.keys():
+            if key.split('.')[0] == line:
+                count += 1
+
+        print(count)
+
     def do_update(self, line):
         """
         Updates an instance based on the class name and id
@@ -226,6 +273,22 @@ class HBNBCommand(cmd.Cmd):
         """
 
         return True
+
+    def default(self, line):
+        """
+        Handles unknown commands, allowing method calls with parentheses.
+
+        Args:
+        - line (str): The command line
+        """
+
+        match_all = re.match(r"^(.+)\.(.+)\(\)$", line)
+        if match_all:
+            line = match_all.group(1)
+            if match_all.group(2) == 'all':
+                self.dot_notation_all(line)
+            elif match_all.group(2) == 'count':
+                self.dot_notation_count(line)
 
     def help_create(self):
         """Prints documentation for create command."""
