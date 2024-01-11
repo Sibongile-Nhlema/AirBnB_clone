@@ -162,23 +162,23 @@ class HBNBCommand(cmd.Cmd):
             str_representations = [f'"{str(obj)}"' for obj in objects.values()]
             print('[' + ', '.join(str_representations) + ']')
 
-    def dot_notation_all(self, line):
+    def dot_notation_all(self, class_name):
         """
         Prints string representation of all instances,
         based or not on the class name.
 
         Args:
-        - line (str): The command line
+        - class_name (str): The name of a class
         """
 
-        if line:
-            if line not in HBNBCommand.__classes:
+        if class_name:
+            if class_name not in HBNBCommand.__classes:
                 print("** class doesn't exist **")
             else:
                 objects = storage.all()
                 str_representations = []
                 for key, obj in objects.items():
-                    if key.split('.')[0] == line:
+                    if key.split('.')[0] == class_name:
                         str_representations.append(str(obj))
                 print(
                     '[' +
@@ -196,7 +196,8 @@ class HBNBCommand(cmd.Cmd):
         Retrieves an instance based on its id.
 
         Args:
-        - line (str): The command line
+        - class_name (str): The name of a class
+        - instance_id: The id of an object
         """
 
         if not class_name:
@@ -214,19 +215,19 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** no instance found **")
 
-    def dot_notation_count(self, line):
+    def dot_notation_count(self, class_name):
         """
         Retrieves the number of instances of a class.
 
         Args:
-        - line (str): The command line
+        - class_name (str): The name of a class
         """
 
         count = 0
         objects = storage.all()
 
         for key in objects.keys():
-            if key.split('.')[0] == line:
+            if key.split('.')[0] == class_name:
                 count += 1
 
         print(count)
