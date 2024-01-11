@@ -62,7 +62,7 @@ class HBNBCommand(cmd.Cmd):
             "Review"
             }
 
-    def handle_unknown_syntax(self, line):
+    def default(self, line):
         '''
         Handles the retrieval of the instances using the .all() method
         Usage: <class name>.all()
@@ -73,6 +73,20 @@ class HBNBCommand(cmd.Cmd):
             if there is a valid class name and a valid command:
                 execute the command
         '''
+        new_list = line.split(".")
+        command_dict = {
+                "all()": "self.do_all(line)", 
+                "count()": "self.do_count(new_list[0])"
+                }
+
+        if new_list[0] not in HBNBCommand.__classes or len(new_list) == 1:
+            print("*** Unknown syntax: {}".format(line))
+            return False
+        else:
+            if new_list[0] in HBNBCommand.__classes and new_list[1] in command_dict:
+                result = (eval(command_dict[new_list[1]]))
+            else:
+                print("*** Unknown syntax: {}".format(line))
 
     def do_quit(self, line):
         '''
@@ -208,7 +222,17 @@ class HBNBCommand(cmd.Cmd):
             line (str): The input line containing the class name
         '''
         ar_line = parse(line)
-        if len(ar_line) > 0 and ar_line[0] not in HBNBCommand.__classes:
+        if "." in ar_line[0]:
+            new_list = line.split(".")
+            class_name = new_list[0]
+            object_list = []
+            for obj in storage.all().values():
+                 if class_name == obj.__class__.__name__:
+                     instance = obj.__str__()
+                     instance = re.sub(r'"', '', instance)
+                     object_list.append(instance)
+            print(str(object_list).replace('"', ""))
+        elif len(ar_line) > 0 and ar_line[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
         else:
             object_list = []
