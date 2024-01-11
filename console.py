@@ -191,6 +191,29 @@ class HBNBCommand(cmd.Cmd):
             str_representations = [f'{str(obj)}' for obj in objects.values()]
             print('[' + ', '.join(str_representations) + ']')
 
+    def dot_notation_show(self, class_name, instance_id):
+        """
+        Retrieves an instance based on its id.
+
+        Args:
+        - line (str): The command line
+        """
+
+        if not class_name:
+            print("** class name missing **")
+        elif class_name not in HBNBCommand.__classes:
+            print("** class doesn't exist **")
+        elif not instance_id:
+            print("** instance id missing **")
+        else:
+            key = f"{class_name}.{instance_id}"
+            objects = storage.all()
+
+            if key in objects:
+                print(str(objects[key]))
+            else:
+                print("** no instance found **")
+
     def dot_notation_count(self, line):
         """
         Retrieves the number of instances of a class.
@@ -282,13 +305,16 @@ class HBNBCommand(cmd.Cmd):
         - line (str): The command line
         """
 
-        match_all = re.match(r"^(.+)\.(.+)\(\)$", line)
+        match_all = re.match(r"^(.+)\.(.+)\((.*)\)$", line)
         if match_all:
             line = match_all.group(1)
             if match_all.group(2) == 'all':
                 self.dot_notation_all(line)
             elif match_all.group(2) == 'count':
                 self.dot_notation_count(line)
+            elif match_all.group(2) == 'show':
+                instance_id = match_all.group(3)
+                self.dot_notation_show(line, instance_id)
 
     def help_create(self):
         """Prints documentation for create command."""
