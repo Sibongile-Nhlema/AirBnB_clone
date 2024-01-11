@@ -215,6 +215,31 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** no instance found **")
 
+    def dot_notation_destroy(self, class_name, instance_id):
+        """
+        Destroys an instance based on its id.
+
+        Args:
+        - class_name (str): The name of a class
+        - instance_id: The id of an object
+        """
+
+        if not class_name:
+            print("** class name missing **")
+        elif class_name not in HBNBCommand.__classes:
+            print("** class doesn't exist **")
+        elif not instance_id:
+            print("** instance id missing **")
+        else:
+            key = f"{class_name}.{instance_id}"
+            objects = storage.all()
+
+            if key in objects:
+                del objects[key]
+                storage.save()
+            else:
+                print("** no instance found **")
+
     def dot_notation_count(self, class_name):
         """
         Retrieves the number of instances of a class.
@@ -307,6 +332,18 @@ class HBNBCommand(cmd.Cmd):
         """
 
         match_all = re.match(r"^(.+)\.(.+)\((.*)\)$", line)
+        instance_id = match_all.group(3)
+
+        if instance_id:
+            if (
+                    instance_id.startswith('"')
+                    and instance_id.endswith('"')):
+                instance_id = instance_id.split('"')[1]
+            elif (
+                    instance_id.startswith("'")
+                    and instance_id.endswith("'")):
+                instance_id = instance_id.split("'")[1]
+
         if match_all:
             line = match_all.group(1)
             if match_all.group(2) == 'all':
@@ -314,8 +351,9 @@ class HBNBCommand(cmd.Cmd):
             elif match_all.group(2) == 'count':
                 self.dot_notation_count(line)
             elif match_all.group(2) == 'show':
-                instance_id = match_all.group(3)
                 self.dot_notation_show(line, instance_id)
+            elif match_all.group(2) == 'destroy':
+                self.dot_notation_destroy(line, instance_id)
 
     def help_create(self):
         """Prints documentation for create command."""
