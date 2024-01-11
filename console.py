@@ -62,6 +62,18 @@ class HBNBCommand(cmd.Cmd):
             "Review"
             }
 
+    def handle_unknown_syntax(self, line):
+        '''
+        Handles the retrieval of the instances using the .all() method
+        Usage: <class name>.all()
+        '''
+        '''
+        read the line
+        if match ".":
+            if there is a valid class name and a valid command:
+                execute the command
+        '''
+
     def do_quit(self, line):
         '''
         Quit command to exit the program
