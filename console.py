@@ -78,7 +78,8 @@ class HBNBCommand(cmd.Cmd):
                 "all()": "self.do_all(line)", 
                 "count()": "self.do_count(line)",
                 "show()": "self.do_show(line)",
-                "destroy()": "self.do_destroy(line)"
+                "destroy()": "self.do_destroy(line)",
+                "update()": "self.do_update(line)"
                 }
 
         if new_list[0] not in HBNBCommand.__classes or len(new_list) == 1:
@@ -87,16 +88,20 @@ class HBNBCommand(cmd.Cmd):
         else:
             pattern = r'show\("[\w-]+"\)'
             pattern_1 = r'destroy\("[\w-]+"\)'
+            pattern_2 = r'update\([^)]*\)'
             matched = re.search(pattern, new_list[1])
             matched_1 = re.search(pattern_1, new_list[1])
+            matched_2 = re.search(pattern_2, new_list[1])
             if matched:
                 eval(command_dict["show()"])
-            if matched_1:
+            elif matched_1:
                 eval(command_dict["destroy()"])
+            elif matched_2:
+                eval(command_dict["update()"])
             elif new_list[0] in HBNBCommand.__classes and new_list[1] in command_dict:
                 eval(command_dict[new_list[1]])
             else:
-                print("*** Unknown syntax: {}".format(line))
+                print("*** Unknown syntax: {}!!".format(line))
 
     def do_quit(self, line):
         '''
@@ -301,6 +306,7 @@ class HBNBCommand(cmd.Cmd):
         args_line = parse(line)
         all_instances = storage.all()
 
+        print(line)
         if not args_line:
             print("** class name missing **")
         elif args_line[0] not in HBNBCommand.__classes:
