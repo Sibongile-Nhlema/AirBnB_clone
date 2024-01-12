@@ -31,6 +31,134 @@ from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 
 
+class TestHBNBCommand_create(unittest.TestCase):
+    ''' Tests the create method '''
+    @classmethod
+    def setUp(self):
+        ''' Initialize necessary objects before each test '''
+        try:
+            os.rename("file.json", "tmp")
+        except IOError:
+            pass
+        FileStorage.__objects = {}
+
+    @classmethod
+    def tearDown(self):
+        ''' Clean up after each test '''
+        try:
+            os.remove("file.json")
+        except IOError:
+            pass
+        try:
+            os.rename("tmp", "file.json")
+        except IOError:
+            pass
+        storage.reload()
+
+    def test_create_class_name_missing(self):
+        ''' Tests the instance of a missing class '''
+        response = "** class name missing **"
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("create"))
+            self.assertEqual(response, output.getvalue().strip())
+
+    def test_create_class_name_nonexistant(self):
+        ''' Tests the instance of a nonexistant class '''
+        response = "** class doesn't exist **"
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("create Townsville"))
+            self.assertEqual(response, output.getvalue().strip())
+
+
+class TestHBNBCommand_update(unittest.TestCase):
+    ''' Tests the update method '''
+    @classmethod
+    def setUp(self):
+        ''' Initialize necessary objects before each test '''
+        try:
+            os.rename("file.json", "tmp")
+        except IOError:
+            pass
+        FileStorage.__objects = {}
+
+    @classmethod
+    def tearDown(self):
+        ''' Clean up after each test '''
+        try:
+            os.remove("file.json")
+        except IOError:
+            pass
+        try:
+            os.rename("tmp", "file.json")
+        except IOError:
+            pass
+        storage.reload()
+
+    def test_update_class_name_missing(self):
+        ''' Tests the instance of a missing class '''
+        response = "** class name missing **"
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("update"))
+            self.assertEqual(response, output.getvalue().strip())
+
+    def test_update_class_name_nonexistant(self):
+        ''' Tests the instance of a nonexistant class '''
+        response = "** class doesn't exist **"
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("update Townsville"))
+            self.assertEqual(response, output.getvalue().strip())
+
+    def test_update_no_id_(self):
+        ''' Tests the instance of a missing id'''
+        response = "** instance id missing **"
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("update BaseModel"))
+            self.assertEqual(response, output.getvalue().strip())
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("update User"))
+            self.assertEqual(response, output.getvalue().strip())
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("update State"))
+            self.assertEqual(response, output.getvalue().strip())
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("update City"))
+            self.assertEqual(response, output.getvalue().strip())
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("update Amenity"))
+            self.assertEqual(response, output.getvalue().strip())
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("update Place"))
+            self.assertEqual(response, output.getvalue().strip())
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("update Review"))
+            self.assertEqual(response, output.getvalue().strip())
+
+    def test_update_id_not_found(self):
+        ''' Tests the instance of no instance found '''
+        response = "** no instance found **"
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("update BaseModel 1234"))
+            self.assertEqual(response, output.getvalue().strip())
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("update User 1234"))
+            self.assertEqual(response, output.getvalue().strip())
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("update State 1234"))
+            self.assertEqual(response, output.getvalue().strip())
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("update City 1234"))
+            self.assertEqual(response, output.getvalue().strip())
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("update Amenity 1234"))
+            self.assertEqual(response, output.getvalue().strip())
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("update Place 1234"))
+            self.assertEqual(response, output.getvalue().strip())
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("update Review 1234"))
+            self.assertEqual(response, output.getvalue().strip())
+
+
 class TestHBNBCommand_destroy_updated(unittest.TestCase):
     ''' Tests the dot notation of the destroy method '''
     @classmethod

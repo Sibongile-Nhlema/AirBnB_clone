@@ -185,13 +185,12 @@ class HBNBCommand(cmd.Cmd):
             line (str): The input line containing the class name
         '''
         args_line = parse(line)
-        arg_1 = args_line[0]
         if not args_line:
             print("** class name missing **")
-        elif arg_1 not in HBNBCommand.__classes:
+        elif args_line[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
         else:
-            print(eval(arg_1)().id)
+            print(eval(args_line[0])().id)
             storage.save()
 
     def do_show(self, line):
@@ -324,16 +323,17 @@ class HBNBCommand(cmd.Cmd):
 
         # handle <class name>.update(<id> <key> <value>)
         class_name = line.split(".")[0]
-        uuid_pattern = r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
-        dict_pattern = r"\{[^}]*\}"
-        uuid_match = re.search(uuid_pattern, line)
-        dict_match = re.search(dict_pattern, args_line[1])
 
         if class_name not in HBNBCommand.__classes:
             print("** class doesn't exist **")
             return
 
+        uuid_pattern = r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+        dict_pattern = r"\{[^}]*\}"
+        uuid_match = re.search(uuid_pattern, line)
+
         if uuid_match:
+            dict_match = re.search(dict_pattern, args_line[1])
             extracted_uuid = str(uuid_match.group(0))
             instance_key = "{}.{}".format(class_name, extracted_uuid)
             instance = all_instances[instance_key]
