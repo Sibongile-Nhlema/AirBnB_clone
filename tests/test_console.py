@@ -31,8 +31,95 @@ from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 
 
-class TestHBNBCommand_create(unittest.TestCase):
-    ''' Tests the create method '''
+class TestHBNBCommand_destroy_updated(unittest.TestCase):
+    ''' Tests the dot notation of the destroy method '''
+    @classmethod
+    def setUp(self):
+        ''' Initialize necessary objects before each test '''
+        try:
+            os.rename("file.json", "tmp")
+        except IOError:
+            pass
+        FileStorage.__objects = {}
+
+    @classmethod
+    def tearDown(self):
+        ''' Clean up after each test '''
+        try:
+            os.remove("file.json")
+        except IOError:
+            pass
+        try:
+            os.rename("tmp", "file.json")
+        except IOError:
+            pass
+        storage.reload()
+
+    def test_destroy_class_name_missing(self):
+        ''' Tests the instance of a missing class '''
+        response = "*** Unknown syntax: .destroy()"
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd(".destroy()"))
+            self.assertEqual(response, output.getvalue().strip())
+
+    def test_destroy_class_name_nonexistant(self):
+        ''' Tests the instance of a nonexistant class '''
+        response = "*** Unknown syntax: Townsville.destroy()"
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("Townsville.destroy()"))
+            self.assertEqual(response, output.getvalue().strip())
+
+    def test_destroy_no_id_(self):
+        ''' Tests the instance of a missing id'''
+        response = "** no instance found **"
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("BaseModel.destroy()"))
+            self.assertEqual(response, output.getvalue().strip())
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("User.destroy()"))
+            self.assertEqual(response, output.getvalue().strip())
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("State.destroy()"))
+            self.assertEqual(response, output.getvalue().strip())
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("City.destroy()"))
+            self.assertEqual(response, output.getvalue().strip())
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("Amenity.destroy()"))
+            self.assertEqual(response, output.getvalue().strip())
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("Place.destroy()"))
+            self.assertEqual(response, output.getvalue().strip())
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("Review.destroy()"))
+            self.assertEqual(response, output.getvalue().strip())
+
+    def test_destroy_id_not_found(self):
+        ''' Tests the instance of no instance found '''
+        response = "** no instance found **"
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("BaseModel.destroy(1234)"))
+            self.assertEqual(response, output.getvalue().strip())
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("User.destroy(1234)"))
+            self.assertEqual(response, output.getvalue().strip())
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("State.destroy(1234)"))
+            self.assertEqual(response, output.getvalue().strip())
+        with patch("sys.stdout", new=StringIO()) as output:
+             self.assertFalse(HBNBCommand().onecmd("dCity.destroy(1234)"))
+             self.assertEqual(response, output.getvalue().strip())
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("Amenity.destroy(1234)"))
+            self.assertEqual(response, output.getvalue().strip())
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("Place.destroy(1234)"))
+            self.assertEqual(response, output.getvalue().strip())
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("Review.destroy(1234)"))
+            self.assertEqual(response, output.getvalue().strip())
+
+
 class TestHBNBCommand_destory(unittest.TestCase):
     ''' Tests the destory method '''
     @classmethod
@@ -56,19 +143,7 @@ class TestHBNBCommand_destory(unittest.TestCase):
         except IOError:
             pass
         storage.reload()
-
-    def test_destroy_normal(self):
-        ''' Tests the normal behaviour of the class methods '''
-        class_name = User
-        with patch('sys.stdout', new=StringIO()) as f:
-            HBNBCommand().onecmd("destroy <class name> <id>")
-
-    def test_destroy_with_update(self):
-        ''' Tests the case of updated class methods '''
-        class_name = User
-        with patch('sys.stdout', new=StringIO()) as f:
-            HBNBCommand().onecmd("<class name>.destory(<id>)")
-
+    
     def test_destroy_class_name_missing(self):
         ''' Tests the instance of a missing class '''
         response = "** class name missing **"
@@ -132,7 +207,6 @@ class TestHBNBCommand_destory(unittest.TestCase):
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("destroy Review 1234"))
             self.assertEqual(response, output.getvalue().strip())
-
 
 
 class TestHBNBCommand_exit(unittest.TestCase):
