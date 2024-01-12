@@ -322,10 +322,12 @@ class HBNBCommand(cmd.Cmd):
         args_line = parse(line)
         all_instances = storage.all()
 
-        # handle <class name>.update()
+        # handle <class name>.update(<id> <key> <value>)
         class_name = line.split(".")[0]
         uuid_pattern = r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+        dict_pattern = r"\{[^}]*\}"
         uuid_match = re.search(uuid_pattern, line)
+        dict_match = re.search(dict_pattern, args_line[1])
 
         if class_name not in HBNBCommand.__classes:
             print("** class doesn't exist **")
@@ -335,9 +337,32 @@ class HBNBCommand(cmd.Cmd):
             extracted_uuid = str(uuid_match.group(0))
             instance_key = "{}.{}".format(class_name, extracted_uuid)
             instance = all_instances[instance_key]
-            attribute_name = args_line[1]
-            attribute_value = args_line[2].replace(")", "")
-            handle_update_instance(instance, attribute_name, attribute_value)
+            if dict_match:
+                # handle <class name>.update(<id> <dict>)
+                new_dict = dict_match.group(0).replace("{", "").replace("}", "").replace(":", "")
+                new = parse(new_dict)
+                if len(new) % 2 == 0:
+                    attribute_name = ""
+                    attribute_value = ""
+                    for i in range(len(new)):
+                        if i % 2 == 0:
+                            attribute_name = new[i]
+                        else:
+                            attribute_value = new[i]
+                        if attribute_name and len(attribute_value) != 0:
+                            handle_update_instance(instance, attribute_name, attribute_value)
+                        else:
+                            continue
+                else:
+                    for i in range(len(new)):
+                        if i % 2 == 0:
+                            print("** attribute name missing **")
+                        else:
+                            print("** value missing **")
+            else:
+                attribute_name = args_line[1]
+                attribute_value = args_line[2].replace(")", "")
+                handle_update_instance(instance, attribute_name, attribute_value)
 
         # handle update <class name>
         elif not args_line:
