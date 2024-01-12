@@ -54,5 +54,18 @@ class TestState(unittest.TestCase):
             self.assertEqual(type(getattr(state, key, None)), value)
 
 
+class TestDocumentation(unittest.TestCase):
+    """Tests for existence of docstrings"""
+
+    def test_documentation(self):
+        """Tests if the module, the class,
+        and the methods are documented"""
+
+        from models import state
+
+        self.assertIsNotNone(state.__doc__)
+        self.assertIsNotNone(State.__doc__)
+
+
 if __name__ == "__main__":
     unittest.main()
