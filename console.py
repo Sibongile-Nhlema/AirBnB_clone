@@ -31,25 +31,25 @@ def handle_update_instance(instance, attribute_name, attribute_value):
         setattr(instance, attribute_name, attribute_value)
         storage.save()
 
-def parse(arg):
+def parse(line):
     '''
     Parses the line and returns the parsed elements
     '''
-    curly_braces = re.search(r"\{(.*?)\}", arg)
-    brackets = re.search(r"\[(.*?)\]", arg)
-    if curly_braces is None:
-        if brackets is None:
-            return [i.strip(",") for i in split(arg)]
+    curly_match = re.search(r"\{(.*?)\}", line)
+    bracket_match = re.search(r"\[(.*?)\]", line)
+    if curly_match is None:
+        if bracket_match is None:
+            return [i.strip(",") for i in split(line)]
         else:
-            lexer = split(arg[:brackets.span()[0]])
-            retl = [i.strip(",") for i in lexer]
-            retl.append(brackets.group())
-            return retl
+            lexer = split(line[:bracket_match.span()[0]])
+            parsed_elements = [i.strip(",") for i in lexer]
+            parsed_elements.append(bracket_match.group())
+            return parsed_elements
     else:
-        lexer = split(arg[:curly_braces.span()[0]])
-        retl = [i.strip(",") for i in lexer]
-        retl.append(curly_braces.group())
-        return retl
+        lexer = split(line[:curly_match.span()[0]])
+        parsed_elements = [i.strip(",") for i in lexer]
+        parsed_elements.append(curly_match.group())
+        return parsed_elements
 
 class HBNBCommand(cmd.Cmd):
     '''
