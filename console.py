@@ -87,8 +87,6 @@ class HBNBCommand(cmd.Cmd):
             pattern = r'show\("[\w-]+"\)'
             matched = re.search(pattern, new_list[1])
             if matched:
-                print("hi")
-                print('Pattern found:', matched.group())
                 eval(command_dict["show()"])
             elif new_list[0] in HBNBCommand.__classes and new_list[1] in command_dict:
                 eval(command_dict[new_list[1]])
@@ -182,11 +180,26 @@ class HBNBCommand(cmd.Cmd):
         '''
         args_line = parse(line)
         all_instances = storage.all()
-        if not args_line:
+
+        # handle <class name>.show(<id>)
+        if "." in args_line[0]:
+            class_name = line.split(".")[0]
+            uuid_pattern = r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+            uuid_match = re.search(uuid_pattern, line)
+            if class_name not in HBNBCommand.__classes:
+                print("** class doesn't exist **")
+                return
+            if uuid_match:
+                extracted_uuid = uuid_match.group(0)
+                instance_key = "{}.{}".format(class_name, extracted_uuid)
+                print(all_instances[instance_key])
+            else:
+                print("** no instance found **")
+        # Handle show <class_name>
+        elif not args_line:
             print("** class name missing **")
         elif args_line[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
-            print(line)
         elif len(args_line) < 2:
             print("** instance id missing **")
         elif "{}.{}".format(args_line[0], args_line[1]) not in all_instances:
