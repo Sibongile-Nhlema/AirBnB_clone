@@ -101,7 +101,7 @@ class HBNBCommand(cmd.Cmd):
             elif new_list[0] in HBNBCommand.__classes and new_list[1] in command_dict:
                 eval(command_dict[new_list[1]])
             else:
-                print("*** Unknown syntax: {}!!".format(line))
+                print("*** Unknown syntax: {}".format(line))
 
     def do_quit(self, line):
         '''
@@ -307,7 +307,29 @@ class HBNBCommand(cmd.Cmd):
         all_instances = storage.all()
 
         print(line)
-        if not args_line:
+        # handle <class name>.update()
+        class_name = line.split(".")[0]
+        uuid_pattern = r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+        uuid_match = re.search(uuid_pattern, line)
+        if class_name not in HBNBCommand.__classes:
+            print("** class doesn't exist **")
+            return
+        if uuid_match:
+            extracted_uuid = uuid_match.group(0)
+            instance_key = "{}.{}".format(class_name, extracted_uuid)
+            instance = all_instances[instance_key]
+            attribute_name = str(args_line[1])
+            attribute_value = str(args_line[2])
+            if not attribute_name:
+                print("** attribute name missing **")
+            elif not attribute_value:
+                print("** value missing **")
+            else:
+                setattr(instance, attribute_name, attribute_value)
+                storage.save()
+
+        # handle update <class name>
+        elif not args_line:
             print("** class name missing **")
         elif args_line[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
