@@ -77,7 +77,8 @@ class HBNBCommand(cmd.Cmd):
         command_dict = {
                 "all()": "self.do_all(line)", 
                 "count()": "self.do_count(line)",
-                "show()": "self.do_show(line)"
+                "show()": "self.do_show(line)",
+                "destroy()": "self.do_destroy(line)"
                 }
 
         if new_list[0] not in HBNBCommand.__classes or len(new_list) == 1:
@@ -85,9 +86,13 @@ class HBNBCommand(cmd.Cmd):
             return False
         else:
             pattern = r'show\("[\w-]+"\)'
+            pattern_1 = r'destroy\("[\w-]+"\)'
             matched = re.search(pattern, new_list[1])
+            matched_1 = re.search(pattern_1, new_list[1])
             if matched:
                 eval(command_dict["show()"])
+            if matched_1:
+                eval(command_dict["destroy()"])
             elif new_list[0] in HBNBCommand.__classes and new_list[1] in command_dict:
                 eval(command_dict[new_list[1]])
             else:
@@ -219,7 +224,25 @@ class HBNBCommand(cmd.Cmd):
         '''
         args_line = parse(line)
         all_instances = storage.all()
-        if not args_line:
+
+        # handle <class name>.destory(<id>)
+        if "." in args_line[0]:
+            class_name = line.split(".")[0]
+            uuid_pattern = r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+            uuid_match = re.search(uuid_pattern, line)
+            if class_name not in HBNBCommand.__classes:
+                print("** class doesn't exist **")
+                return
+            if uuid_match:
+                extracted_uuid = uuid_match.group(0)
+                instance_key = "{}.{}".format(class_name, extracted_uuid)
+                del all_instances[instance_key]
+                storage.save()
+            else:
+                print("** no instance found **")
+
+        # Handle destory(<id>)
+        elif not args_line:
             print("** class name missing **")
         elif args_line[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
