@@ -246,8 +246,10 @@ class HBNBCommand(cmd.Cmd):
         args_line = parse(line)
         all_instances = storage.all()
 
+        if not args_line:
+            print("** class name missing **")
         # handle <class name>.destory(<id>)
-        if "." in args_line[0]:
+        elif "." in args_line[0]:
             class_name = line.split(".")[0]
             uuid_pattern = r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
             uuid_match = re.search(uuid_pattern, line)
@@ -263,8 +265,6 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
 
         # Handle destory(<id>)
-        elif not args_line:
-            print("** class name missing **")
         elif args_line[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
         elif len(args_line) < 2:

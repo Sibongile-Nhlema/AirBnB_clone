@@ -70,10 +70,18 @@ class TestHBNBCommand_destory(unittest.TestCase):
             HBNBCommand().onecmd("<class name>.destory(<id>)")
 
     def test_destroy_class_name_missing(self):
-        pass
+        ''' Tests the instance of a missing class '''
+        response = "** class name missing **"
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("destroy"))
+            self.assertEqual(response, output.getvalue().strip())
 
     def test_destroy_class_name_nonexistant(self):
-        pass
+        ''' Tests the instance of a nonexistant class '''
+        response = "** class doesn't exist **"
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("destroy Townsville"))
+            self.assertEqual(response, output.getvalue().strip())
 
     def test_destroy_no_id_(self):
         ''' Tests the instance of a missing id'''
