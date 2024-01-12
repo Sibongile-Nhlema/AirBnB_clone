@@ -14,26 +14,42 @@ from models.amenity import Amenity
 from models.base_model import BaseModel
 
 
-def parse(line):
+def handle_update_instance(instance, attribute_name, attribute_value):
+    '''
+    Handles updating an instance with the given attribute name and value.
+
+    Args:
+        instance: The instance to be updated.
+        attribute_name: The name of the attribute to be updated.
+        attribute_value: The value to be assigned to the attribute.
+    '''
+    if not attribute_name:
+        print("** attribute name missing **")
+    elif not attribute_value:
+        print("** value missing **")
+    else:
+        setattr(instance, attribute_name, attribute_value)
+        storage.save()
+
+def parse(arg):
     '''
     Parses the line and returns the parsed elements
     '''
-    curly_match = re.search(r"\{(.*?)\}", line)
-    bracket_match = re.search(r"\[(.*?)\]", line)
-
-    if curly_match:
-        lexer = line.split()[:curly_match.span()[0]]
-        parsed_elements = [item.strip(",") for item in lexer]
-        parsed_elements.append(curly_match.group())
-    elif bracket_match:
-        lexer = line.split()[:bracket_match.span()[0]]
-        parsed_elements = [item.strip(",") for item in lexer]
-        parsed_elements.append(bracket_match.group())
+    curly_braces = re.search(r"\{(.*?)\}", arg)
+    brackets = re.search(r"\[(.*?)\]", arg)
+    if curly_braces is None:
+        if brackets is None:
+            return [i.strip(",") for i in split(arg)]
+        else:
+            lexer = split(arg[:brackets.span()[0]])
+            retl = [i.strip(",") for i in lexer]
+            retl.append(brackets.group())
+            return retl
     else:
-        parsed_elements = [item.strip(",") for item in line.split()]
-
-    return parsed_elements
-
+        lexer = split(arg[:curly_braces.span()[0]])
+        retl = [i.strip(",") for i in lexer]
+        retl.append(curly_braces.group())
+        return retl
 
 class HBNBCommand(cmd.Cmd):
     '''
@@ -306,27 +322,22 @@ class HBNBCommand(cmd.Cmd):
         args_line = parse(line)
         all_instances = storage.all()
 
-        print(line)
         # handle <class name>.update()
         class_name = line.split(".")[0]
         uuid_pattern = r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
         uuid_match = re.search(uuid_pattern, line)
+
         if class_name not in HBNBCommand.__classes:
             print("** class doesn't exist **")
             return
+
         if uuid_match:
-            extracted_uuid = uuid_match.group(0)
+            extracted_uuid = str(uuid_match.group(0))
             instance_key = "{}.{}".format(class_name, extracted_uuid)
             instance = all_instances[instance_key]
-            attribute_name = str(args_line[1])
-            attribute_value = str(args_line[2])
-            if not attribute_name:
-                print("** attribute name missing **")
-            elif not attribute_value:
-                print("** value missing **")
-            else:
-                setattr(instance, attribute_name, attribute_value)
-                storage.save()
+            attribute_name = args_line[1]
+            attribute_value = args_line[2].replace(")", "")
+            handle_update_instance(instance, attribute_name, attribute_value)
 
         # handle update <class name>
         elif not args_line:
@@ -346,14 +357,7 @@ class HBNBCommand(cmd.Cmd):
             instance = all_instances[instance_key]
             attribute_name = args_line[2]
             attribute_value = args_line[3]
-
-            if not attribute_name:
-                print("** attribute name missing **")
-            elif not attribute_value:
-                print("** value missing **")
-            else:
-                setattr(instance, attribute_name, attribute_value)
-                storage.save()
+            handle_update_instance(instance, attribute_name, attribute_value)
 
     def do_count(self, line):
         '''Counts the number of instances of a class '''
