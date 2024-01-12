@@ -16,6 +16,7 @@ from datetime import datetime
 from models.state import State
 from models.place import Place
 from models.review import Review
+from models.amenity import Amenity
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 
@@ -90,42 +91,41 @@ class TestFileStorage_Methods(unittest.TestCase):
     
     def test_new_instance_id(self):
        ''' Tests if the new instance has an id '''
-        base_model = BaseModel()
-        user = User()
-        state = State()
-        place = Place()
-        city = City()
-        amenity = Amenity()
-        review = Review()
+       base_model = BaseModel()
+       user = User()
+       state = State()
+       place = Place()
+       city = City()
+       amenity = Amenity()
+       review = Review()
+       models.storage.new(base_model)
+       models.storage.new(user)
+       models.storage.new(state)
+       models.storage.new(place)
+       models.storage.new(city)
+       models.storage.new(amenity)
+       models.storage.new(review)
 
-        models.storage.new(base_model)
-        models.storage.new(user)
-        models.storage.new(state)
-        models.storage.new(place)
-        models.storage.new(city)
-        models.storage.new(amenity)
-        models.storage.new(review)
+       self.assertIn("BaseModel." + base_model.id, models.storage.all().keys())
+       self.assertIn(base_model, models.storage.all().values())
 
-        self.assertIn("BaseModel." + base_model.id, models.storage.all().keys())
-        self.assertIn(base_model, models.storage.all().values())
+       self.assertIn("User." + user.id, models.storage.all().keys())
+       self.assertIn(user, models.storage.all().values())
 
-        self.assertIn("User." + user.id, models.storage.all().keys())
-        self.assertIn(user, models.storage.all().values())
+       self.assertIn("State." + state.id, models.storage.all().keys())
+       self.assertIn(state, models.storage.all().values())
 
-        self.assertIn("State." + state.id, models.storage.all().keys())
-        self.assertIn(state, models.storage.all().values())
+       self.assertIn("Place." + place.id, models.storage.all().keys())
+       self.assertIn(place, models.storage.all().values())
 
-        self.assertIn("Place." + place.id, models.storage.all().keys())
-        self.assertIn(place, models.storage.all().values())
+       self.assertIn("City." + city.id, models.storage.all().keys())
+       self.assertIn(city, models.storage.all().values())
 
-        self.assertIn("City." + city.id, models.storage.all().keys())
-        self.assertIn(city, models.storage.all().values())
+       self.assertIn("Amenity." + amenity.id, models.storage.all().keys())
+       self.assertIn(amenity, models.storage.all().values())
 
-        self.assertIn("Amenity." + amenity.id, models.storage.all().keys())
-        self.assertIn(amenity, models.storage.all().values())
-
-        self.assertIn("Review." + review.id, models.storage.all().keys())
-        self.assertIn(review, models.storage.all().values())
+       self.assertIn("Review." + review.id, models.storage.all().keys())
+       self.assertIn(review, models.storage.all().values())
 
     def test_save(self):
         ''' tests the save method of the FileStorage class '''
