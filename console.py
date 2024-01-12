@@ -51,6 +51,10 @@ class HBNBCommand(cmd.Cmd):
     """
     The entry point of the command interpreter
 
+    Class Attributes:
+    - prompt (str): The prompt to be displayed
+    - __classes (set): The classes used in the application
+
     Commands:
     - quit: Exists the program.
     - create: Creates a new instance of BaseModel,
@@ -62,6 +66,7 @@ class HBNBCommand(cmd.Cmd):
     based or not on the class name.
     - update: Updates an instance based on the class name and id
     by adding or updating attribute.
+    - count: Retrieves the number of instances of a class.
     """
 
     prompt = '(hbnb) '
