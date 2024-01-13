@@ -166,7 +166,7 @@ class TestHBNBCommand_exit(unittest.TestCase):
 
 
 class TestHBNBCommand_create(unittest.TestCase):
-    """Tests the create command"""
+    """Tests the create command."""
 
     def setUp(self):
         """Renames the storage file and empties __objects."""
