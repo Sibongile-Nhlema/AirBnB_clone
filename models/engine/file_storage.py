@@ -35,6 +35,8 @@ class FileStorage:
         Returns the dictionary private instance __objects
         '''
 
+        from models.base_model import BaseModel
+
         return FileStorage.__objects
 
     def new(self, obj):
@@ -46,6 +48,8 @@ class FileStorage:
             obj (dict): dictionary of key/value pairs
         '''
 
+        from models.base_model import BaseModel
+
         key = "{}.{}".format(obj.__class__.__name__, obj.id)
         FileStorage.__objects[key] = obj
 
@@ -53,6 +57,8 @@ class FileStorage:
         '''
         Saves serializes __objects to the JSON file into __file_path
         '''
+
+        from models.base_model import BaseModel
 
         serialized_objs = {
             key: obj.to_dict() for key, obj in FileStorage.__objects.items()
@@ -76,5 +82,5 @@ class FileStorage:
 
             for value in serialized_objs.values():
                 class_name = value['__class__']
-                obj = globals()[class_name](**value)
+                obj = eval(class_name)(**value)
                 self.new(obj)
