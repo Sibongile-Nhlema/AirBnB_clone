@@ -84,6 +84,7 @@ class TestHBNBCommand_help(unittest.TestCase):
 
         text = ("Usage: show <class_name> <id>\n"
                 "Print the string representation of an instance.")
+
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help show"))
             self.assertEqual(text, output.getvalue().strip())
