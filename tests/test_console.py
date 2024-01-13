@@ -131,6 +131,7 @@ class TestHBNBCommand_help(unittest.TestCase):
             "Usage: update <class_name> <id> "
             "<attribute_name> <attribute_value>\n"
             "Update an instance based on the class name and id.")
+
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help update"))
             self.assertEqual(text, output.getvalue().strip())
