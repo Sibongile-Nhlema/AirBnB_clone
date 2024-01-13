@@ -73,6 +73,7 @@ class TestHBNBCommand_help(unittest.TestCase):
         for the EOF command."""
 
         text = "Exits the program."
+
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help EOF"))
             self.assertEqual(text, output.getvalue().strip())
