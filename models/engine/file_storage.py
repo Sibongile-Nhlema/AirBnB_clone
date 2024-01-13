@@ -68,6 +68,8 @@ class FileStorage:
         If the JSON file does not exist, no exception will be raised.
         '''
 
+        from models.base_model import BaseModel
+
         if os.path.isfile(FileStorage.__file_path):
             with open(FileStorage.__file_path, encoding="utf-8") as f:
                 serialized_objs = json.load(f)
