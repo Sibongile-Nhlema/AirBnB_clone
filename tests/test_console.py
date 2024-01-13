@@ -27,7 +27,7 @@ from unittest.mock import patch
 
 
 class TestHBNBCommand_prompt(unittest.TestCase):
-    """Tests prompting of the HBNB command interpreter."""
+    """Tests the prompting of the HBNB command interpreter."""
 
     def test_prompt_string(self):
         """Tests the printed prompt."""
