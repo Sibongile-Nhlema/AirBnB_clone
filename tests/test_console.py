@@ -159,7 +159,7 @@ class TestHBNBCommand_exit(unittest.TestCase):
             self.assertTrue(HBNBCommand().onecmd("quit"))
 
     def test_EOF(self):
-        """Tests the EOF command"""
+        """Tests the EOF command."""
 
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertTrue(HBNBCommand().onecmd("EOF"))
