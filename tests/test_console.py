@@ -310,6 +310,7 @@ class TestHBNBCommand_show(unittest.TestCase):
         """Tests the show command with a wrong class name."""
 
         correct = "** class doesn't exist **"
+
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("show MyModel"))
             self.assertEqual(correct, output.getvalue().strip())
