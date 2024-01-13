@@ -56,6 +56,7 @@ class TestUser(unittest.TestCase):
             self.assertTrue(hasattr(user, key))
             self.assertEqual(type(getattr(user, key, None)), value)
 
+
 class TestDocumentation(unittest.TestCase):
     """Tests for existence of docstrings"""
 
