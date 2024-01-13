@@ -2,13 +2,13 @@
 ''' These Unittests are for the Amenity Class
 
     Unittest classes:
-        TestAmenity
-        TestAmenity_args
-        TestAmenity_Public_Attributes
-        TestAmenity_created_at
-        TestAmenity_updated_at
-        TestAmenity_Public_Methods
-        TestAmenity_save
+        TestAmenity_1
+        TestAmenity_1_args
+        TestAmenity_1_Public_Attributes
+        TestAmenity_1_created_at
+        TestAmenity_1_updated_at
+        TestAmenity_1_Public_Methods
+        TestAmenity_1_save
 '''
 import os
 import models
@@ -18,7 +18,7 @@ from datetime import datetime
 from models.amenity import Amenity
 
 
-class TestAmenity(unittest.TestCase):
+class TestAmenity_1(unittest.TestCase):
     '''
     Unittests for all cases for the Amenity class
     '''
@@ -34,7 +34,7 @@ class TestAmenity(unittest.TestCase):
         self.assertNotEqual(amenity_1.id, base_model_2.id)
 
 
-class TestAmenity_args(unittest.TestCase):
+class TestAmenity_1_args(unittest.TestCase):
     '''
     Unittests for the different arguments made to Amenity
     '''
@@ -62,7 +62,7 @@ class TestAmenity_args(unittest.TestCase):
         self.assertEqual(base_model.updated_at, dt)
 
 
-class TestAmenity_Public_Attributes(unittest.TestCase):
+class TestAmenity_1_Public_Attributes(unittest.TestCase):
     '''
     Unittests for the implementation of the public attributes of the Amenity class
     '''
@@ -81,7 +81,7 @@ class TestAmenity_Public_Attributes(unittest.TestCase):
         self.assertEqual(str(base_model), expected_str)
 
 
-class TestAmenity_created_at(unittest.TestCase):
+class TestAmenity_1_created_at(unittest.TestCase):
     '''
     Unittests for the additional cases of the created_at attribute
     '''
@@ -92,7 +92,7 @@ class TestAmenity_created_at(unittest.TestCase):
         self.assertNotEqual(amenity_1.created_at, base_model_2.created_at)
 
 
-class TestAmenity_updated_at(unittest.TestCase):
+class TestAmenity_1_updated_at(unittest.TestCase):
     '''
     Unittests for the additional cases of the updated_at attribute
     '''
@@ -109,7 +109,7 @@ class TestAmenity_updated_at(unittest.TestCase):
         self.assertNotEqual(amenity_1.updated_at, base_model_2.updated_at)
 
 
-class TestAmenity_Public_Methods(unittest.TestCase):
+class TestAmenity_1_Public_Methods(unittest.TestCase):
     '''
     Unittests for the implementation of the public methods of the Amenity class
     '''
@@ -131,7 +131,7 @@ class TestAmenity_Public_Methods(unittest.TestCase):
         self.assertIsInstance(base_model_dict['updated_at'], str)
 
 
-class TestAmenity_save(unittest.TestCase):
+class TestAmenity_1_save(unittest.TestCase):
     '''
     Unittests for the implementation of the save method in Amenity
     '''
@@ -178,7 +178,7 @@ class TestAmenity_save(unittest.TestCase):
             amenity_1.save(None)
         
 
-class TestAmenity_to_dict(unittest.TestCase):
+class TestAmenity_1_to_dict(unittest.TestCase):
     '''
     Unittests for the implementation of the to_dict method in Amenity
     '''
@@ -220,7 +220,7 @@ class TestAmenity_to_dict(unittest.TestCase):
             base_model.to_dict(None)
 
 
-class TestAmenity_Storage(unittest.TestCase):
+class TestAmenity_1_Storage(unittest.TestCase):
     '''
     Unittests related to storing data
     '''

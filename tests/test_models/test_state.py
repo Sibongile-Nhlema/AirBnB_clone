@@ -2,13 +2,13 @@
 ''' These Unittests are for the State Class
 
     Unittest classes:
-        TestState
-        TestState_args
-        TestState_Public_Attributes
-        TestState_created_at
-        TestState_updated_at
-        TestState_Public_Methods
-        TestState_save
+        TestState_1
+        TestState_1_args
+        TestState_1_Public_Attributes
+        TestState_1_created_at
+        TestState_1_updated_at
+        TestState_1_Public_Methods
+        TestState_1_save
 '''
 import os
 import models
@@ -18,7 +18,7 @@ from datetime import datetime
 from models.state import State
 
 
-class TestState(unittest.TestCase):
+class TestState_1(unittest.TestCase):
     '''
     Unittests for all cases for the State class
     '''
@@ -34,7 +34,7 @@ class TestState(unittest.TestCase):
         self.assertNotEqual(state_1.id, state_2.id)
 
 
-class TestState_args(unittest.TestCase):
+class TestState_1_args(unittest.TestCase):
     '''
     Unittests for the different arguments made to State
     '''
@@ -62,7 +62,7 @@ class TestState_args(unittest.TestCase):
         self.assertEqual(state.updated_at, dt)
 
 
-class TestState_Public_Attributes(unittest.TestCase):
+class TestState_1_Public_Attributes(unittest.TestCase):
     '''
     Unittests for the implementation of the public attributes of the State class
     '''
@@ -81,7 +81,7 @@ class TestState_Public_Attributes(unittest.TestCase):
         self.assertEqual(str(state), expected_str)
 
 
-class TestState_created_at(unittest.TestCase):
+class TestState_1_created_at(unittest.TestCase):
     '''
     Unittests for the additional cases of the created_at attribute
     '''
@@ -92,7 +92,7 @@ class TestState_created_at(unittest.TestCase):
         self.assertNotEqual(state_1.created_at, state_2.created_at)
 
 
-class TestState_updated_at(unittest.TestCase):
+class TestState_1_updated_at(unittest.TestCase):
     '''
     Unittests for the additional cases of the updated_at attribute
     '''
@@ -109,7 +109,7 @@ class TestState_updated_at(unittest.TestCase):
         self.assertNotEqual(state_1.updated_at, state_2.updated_at)
 
 
-class TestState_Public_Methods(unittest.TestCase):
+class TestState_1_Public_Methods(unittest.TestCase):
     '''
     Unittests for the implementation of the public methods of the State class
     '''
@@ -131,7 +131,7 @@ class TestState_Public_Methods(unittest.TestCase):
         self.assertIsInstance(state_dict['updated_at'], str)
 
 
-class TestState_save(unittest.TestCase):
+class TestState_1_save(unittest.TestCase):
     '''
     Unittests for the implementation of the save method in State
     '''
@@ -178,7 +178,7 @@ class TestState_save(unittest.TestCase):
             state_1.save(None)
         
 
-class TestState_to_dict(unittest.TestCase):
+class TestState_1_to_dict(unittest.TestCase):
     '''
     Unittests for the implementation of the to_dict method in State
     '''
@@ -220,7 +220,7 @@ class TestState_to_dict(unittest.TestCase):
             state.to_dict(None)
 
 
-class TestState_Storage(unittest.TestCase):
+class TestState_1_Storage(unittest.TestCase):
     '''
     Unittests related to storing data
     '''

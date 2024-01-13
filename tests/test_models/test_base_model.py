@@ -2,13 +2,13 @@
 ''' These Unittests are for the BaseModel Class
 
     Unittest classes:
-        TestBaseModel
-        TestBaseModel_args
-        TestBaseModel_Public_Attributes
-        TestBaseModel_created_at
-        TestBaseModel_updated_at
-        TestBaseModel_Public_Methods
-        TestBaseModel_save
+        TestBaseModel_1
+        TestBaseModel_1_args
+        TestBaseModel_1_Public_Attributes
+        TestBaseModel_1_created_at
+        TestBaseModel_1_updated_at
+        TestBaseModel_1_Public_Methods
+        TestBaseModel_1_save
 '''
 import os
 import models
@@ -18,7 +18,7 @@ from datetime import datetime
 from models.base_model import BaseModel
 
 
-class TestBaseModel(unittest.TestCase):
+class TestBaseModel_1(unittest.TestCase):
     '''
     Unittests for all cases for the BaseModel class
     '''
@@ -34,7 +34,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertNotEqual(base_model_1.id, base_model_2.id)
 
 
-class TestBaseModel_args(unittest.TestCase):
+class TestBaseModel_1_args(unittest.TestCase):
     '''
     Unittests for the different arguments made to BaseModel
     '''
@@ -62,7 +62,7 @@ class TestBaseModel_args(unittest.TestCase):
         self.assertEqual(base_model.updated_at, dt)
 
 
-class TestBaseModel_Public_Attributes(unittest.TestCase):
+class TestBaseModel_1_Public_Attributes(unittest.TestCase):
     '''
     Unittests for the implementation of the public attributes of the BaseModel class
     '''
@@ -81,7 +81,7 @@ class TestBaseModel_Public_Attributes(unittest.TestCase):
         self.assertEqual(str(base_model), expected_str)
 
 
-class TestBaseModel_created_at(unittest.TestCase):
+class TestBaseModel_1_created_at(unittest.TestCase):
     '''
     Unittests for the additional cases of the created_at attribute
     '''
@@ -92,7 +92,7 @@ class TestBaseModel_created_at(unittest.TestCase):
         self.assertNotEqual(base_model_1.created_at, base_model_2.created_at)
 
 
-class TestBaseModel_updated_at(unittest.TestCase):
+class TestBaseModel_1_updated_at(unittest.TestCase):
     '''
     Unittests for the additional cases of the updated_at attribute
     '''
@@ -109,7 +109,7 @@ class TestBaseModel_updated_at(unittest.TestCase):
         self.assertNotEqual(base_model_1.updated_at, base_model_2.updated_at)
 
 
-class TestBaseModel_Public_Methods(unittest.TestCase):
+class TestBaseModel_1_Public_Methods(unittest.TestCase):
     '''
     Unittests for the implementation of the public methods of the BaseModel class
     '''
@@ -131,7 +131,7 @@ class TestBaseModel_Public_Methods(unittest.TestCase):
         self.assertIsInstance(base_model_dict['updated_at'], str)
 
 
-class TestBaseModel_save(unittest.TestCase):
+class TestBaseModel_1_save(unittest.TestCase):
     '''
     Unittests for the implementation of the save method in BaseModel
     '''
@@ -178,7 +178,7 @@ class TestBaseModel_save(unittest.TestCase):
             base_model_1.save(None)
         
 
-class TestBaseModel_to_dict(unittest.TestCase):
+class TestBaseModel_1_to_dict(unittest.TestCase):
     '''
     Unittests for the implementation of the to_dict method in BaseModel
     '''
@@ -220,7 +220,7 @@ class TestBaseModel_to_dict(unittest.TestCase):
             base_model.to_dict(None)
 
 
-class TestBaseModel_Storage(unittest.TestCase):
+class TestBaseModel_1_Storage(unittest.TestCase):
     '''
     Unittests related to storing data
     '''

@@ -2,13 +2,13 @@
 ''' These Unittests are for the Place Class
 
     Unittest classes:
-        TestPlace
-        TestPlace_args
-        TestPlace_Public_Attributes
-        TestPlace_created_at
-        TestPlace_updated_at
-        TestPlace_Public_Methods
-        TestPlace_save
+        TestPlace_1
+        TestPlace_1_args
+        TestPlace_1_Public_Attributes
+        TestPlace_1_created_at
+        TestPlace_1_updated_at
+        TestPlace_1_Public_Methods
+        TestPlace_1_save
 '''
 import os
 import models
@@ -18,7 +18,7 @@ from datetime import datetime
 from models.place import Place
 
 
-class TestPlace(unittest.TestCase):
+class TestPlace_1(unittest.TestCase):
     '''
     Unittests for all cases for the Place class
     '''
@@ -34,7 +34,7 @@ class TestPlace(unittest.TestCase):
         self.assertNotEqual(place_1.id, base_model_2.id)
 
 
-class TestPlace_args(unittest.TestCase):
+class TestPlace_1_args(unittest.TestCase):
     '''
     Unittests for the different arguments made to Place
     '''
@@ -62,7 +62,7 @@ class TestPlace_args(unittest.TestCase):
         self.assertEqual(base_model.updated_at, dt)
 
 
-class TestPlace_Public_Attributes(unittest.TestCase):
+class TestPlace_1_Public_Attributes(unittest.TestCase):
     '''
     Unittests for the implementation of the public attributes of the Place class
     '''
@@ -81,7 +81,7 @@ class TestPlace_Public_Attributes(unittest.TestCase):
         self.assertEqual(str(base_model), expected_str)
 
 
-class TestPlace_created_at(unittest.TestCase):
+class TestPlace_1_created_at(unittest.TestCase):
     '''
     Unittests for the additional cases of the created_at attribute
     '''
@@ -92,7 +92,7 @@ class TestPlace_created_at(unittest.TestCase):
         self.assertNotEqual(place_1.created_at, base_model_2.created_at)
 
 
-class TestPlace_updated_at(unittest.TestCase):
+class TestPlace_1_updated_at(unittest.TestCase):
     '''
     Unittests for the additional cases of the updated_at attribute
     '''
@@ -109,7 +109,7 @@ class TestPlace_updated_at(unittest.TestCase):
         self.assertNotEqual(place_1.updated_at, base_model_2.updated_at)
 
 
-class TestPlace_Public_Methods(unittest.TestCase):
+class TestPlace_1_Public_Methods(unittest.TestCase):
     '''
     Unittests for the implementation of the public methods of the Place class
     '''
@@ -131,7 +131,7 @@ class TestPlace_Public_Methods(unittest.TestCase):
         self.assertIsInstance(base_model_dict['updated_at'], str)
 
 
-class TestPlace_save(unittest.TestCase):
+class TestPlace_1_save(unittest.TestCase):
     '''
     Unittests for the implementation of the save method in Place
     '''
@@ -178,7 +178,7 @@ class TestPlace_save(unittest.TestCase):
             place_1.save(None)
         
 
-class TestPlace_to_dict(unittest.TestCase):
+class TestPlace_1_to_dict(unittest.TestCase):
     '''
     Unittests for the implementation of the to_dict method in Place
     '''
@@ -220,7 +220,7 @@ class TestPlace_to_dict(unittest.TestCase):
             base_model.to_dict(None)
 
 
-class TestPlace_Storage(unittest.TestCase):
+class TestPlace_1_Storage(unittest.TestCase):
     '''
     Unittests related to storing data
     '''

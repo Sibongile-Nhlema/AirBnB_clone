@@ -2,13 +2,13 @@
 ''' These Unittests are for the Review Class
 
     Unittest classes:
-        TestReview
-        TestReview_args
-        TestReview_Public_Attributes
-        TestReview_created_at
-        TestReview_updated_at
-        TestReview_Public_Methods
-        TestReview_save
+        TestReview_1
+        TestReview_1_args
+        TestReview_1_Public_Attributes
+        TestReview_1_created_at
+        TestReview_1_updated_at
+        TestReview_1_Public_Methods
+        TestReview_1_save
 '''
 import os
 import models
@@ -18,7 +18,7 @@ from datetime import datetime
 from models.review import Review
 
 
-class TestReview(unittest.TestCase):
+class TestReview_1(unittest.TestCase):
     '''
     Unittests for all cases for the Review class
     '''
@@ -34,7 +34,7 @@ class TestReview(unittest.TestCase):
         self.assertNotEqual(review_1.id, base_model_2.id)
 
 
-class TestReview_args(unittest.TestCase):
+class TestReview_1_args(unittest.TestCase):
     '''
     Unittests for the different arguments made to Review
     '''
@@ -62,7 +62,7 @@ class TestReview_args(unittest.TestCase):
         self.assertEqual(base_model.updated_at, dt)
 
 
-class TestReview_Public_Attributes(unittest.TestCase):
+class TestReview_1_Public_Attributes(unittest.TestCase):
     '''
     Unittests for the implementation of the public attributes of the Review class
     '''
@@ -81,7 +81,7 @@ class TestReview_Public_Attributes(unittest.TestCase):
         self.assertEqual(str(base_model), expected_str)
 
 
-class TestReview_created_at(unittest.TestCase):
+class TestReview_1_created_at(unittest.TestCase):
     '''
     Unittests for the additional cases of the created_at attribute
     '''
@@ -92,7 +92,7 @@ class TestReview_created_at(unittest.TestCase):
         self.assertNotEqual(review_1.created_at, base_model_2.created_at)
 
 
-class TestReview_updated_at(unittest.TestCase):
+class TestReview_1_updated_at(unittest.TestCase):
     '''
     Unittests for the additional cases of the updated_at attribute
     '''
@@ -109,7 +109,7 @@ class TestReview_updated_at(unittest.TestCase):
         self.assertNotEqual(review_1.updated_at, base_model_2.updated_at)
 
 
-class TestReview_Public_Methods(unittest.TestCase):
+class TestReview_1_Public_Methods(unittest.TestCase):
     '''
     Unittests for the implementation of the public methods of the Review class
     '''
@@ -131,7 +131,7 @@ class TestReview_Public_Methods(unittest.TestCase):
         self.assertIsInstance(base_model_dict['updated_at'], str)
 
 
-class TestReview_save(unittest.TestCase):
+class TestReview_1_save(unittest.TestCase):
     '''
     Unittests for the implementation of the save method in Review
     '''
@@ -178,7 +178,7 @@ class TestReview_save(unittest.TestCase):
             review_1.save(None)
         
 
-class TestReview_to_dict(unittest.TestCase):
+class TestReview_1_to_dict(unittest.TestCase):
     '''
     Unittests for the implementation of the to_dict method in Review
     '''
@@ -220,7 +220,7 @@ class TestReview_to_dict(unittest.TestCase):
             base_model.to_dict(None)
 
 
-class TestReview_Storage(unittest.TestCase):
+class TestReview_1_Storage(unittest.TestCase):
     '''
     Unittests related to storing data
     '''

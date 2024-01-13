@@ -2,13 +2,13 @@
 ''' These Unittests are for the User Class
 
     Unittest classes:
-        TestUser
-        TestUser_args
-        TestUser_Public_Attributes
-        TestUser_created_at
-        TestUser_updated_at
-        TestUser_Public_Methods
-        TestUser_save
+        TestUser_1
+        TestUser_1_args
+        TestUser_1_Public_Attributes
+        TestUser_1_created_at
+        TestUser_1_updated_at
+        TestUser_1_Public_Methods
+        TestUser_1_save
 '''
 import os
 import models
@@ -18,7 +18,7 @@ from datetime import datetime
 from models.user import User
 
 
-class TestUser(unittest.TestCase):
+class TestUser_1(unittest.TestCase):
     '''
     Unittests for all cases for the User class
     '''
@@ -34,7 +34,7 @@ class TestUser(unittest.TestCase):
         self.assertNotEqual(user_1.id, base_model_2.id)
 
 
-class TestUser_args(unittest.TestCase):
+class TestUser_1_args(unittest.TestCase):
     '''
     Unittests for the different arguments made to User
     '''
@@ -62,7 +62,7 @@ class TestUser_args(unittest.TestCase):
         self.assertEqual(base_model.updated_at, dt)
 
 
-class TestUser_Public_Attributes(unittest.TestCase):
+class TestUser_1_Public_Attributes(unittest.TestCase):
     '''
     Unittests for the implementation of the public attributes of the User class
     '''
@@ -81,7 +81,7 @@ class TestUser_Public_Attributes(unittest.TestCase):
         self.assertEqual(str(base_model), expected_str)
 
 
-class TestUser_created_at(unittest.TestCase):
+class TestUser_1_created_at(unittest.TestCase):
     '''
     Unittests for the additional cases of the created_at attribute
     '''
@@ -92,7 +92,7 @@ class TestUser_created_at(unittest.TestCase):
         self.assertNotEqual(user_1.created_at, base_model_2.created_at)
 
 
-class TestUser_updated_at(unittest.TestCase):
+class TestUser_1_updated_at(unittest.TestCase):
     '''
     Unittests for the additional cases of the updated_at attribute
     '''
@@ -109,7 +109,7 @@ class TestUser_updated_at(unittest.TestCase):
         self.assertNotEqual(user_1.updated_at, base_model_2.updated_at)
 
 
-class TestUser_Public_Methods(unittest.TestCase):
+class TestUser_1_Public_Methods(unittest.TestCase):
     '''
     Unittests for the implementation of the public methods of the User class
     '''
@@ -131,7 +131,7 @@ class TestUser_Public_Methods(unittest.TestCase):
         self.assertIsInstance(base_model_dict['updated_at'], str)
 
 
-class TestUser_save(unittest.TestCase):
+class TestUser_1_save(unittest.TestCase):
     '''
     Unittests for the implementation of the save method in User
     '''
@@ -178,7 +178,7 @@ class TestUser_save(unittest.TestCase):
             user_1.save(None)
         
 
-class TestUser_to_dict(unittest.TestCase):
+class TestUser_1_to_dict(unittest.TestCase):
     '''
     Unittests for the implementation of the to_dict method in User
     '''
@@ -220,7 +220,7 @@ class TestUser_to_dict(unittest.TestCase):
             base_model.to_dict(None)
 
 
-class TestUser_Storage(unittest.TestCase):
+class TestUser_1_Storage(unittest.TestCase):
     '''
     Unittests related to storing data
     '''

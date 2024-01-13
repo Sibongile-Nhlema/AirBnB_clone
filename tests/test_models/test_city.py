@@ -2,13 +2,13 @@
 ''' These Unittests are for the City Class
 
     Unittest classes:
-        TestCity
-        TestCity_args
-        TestCity_Public_Attributes
-        TestCity_created_at
-        TestCity_updated_at
-        TestCity_Public_Methods
-        TestCity_save
+        TestCity_1
+        TestCity_1_args
+        TestCity_1_Public_Attributes
+        TestCity_1_created_at
+        TestCity_1_updated_at
+        TestCity_1_Public_Methods
+        TestCity_1_save
 '''
 import os
 import models
@@ -18,7 +18,7 @@ from datetime import datetime
 from models.city import City
 
 
-class TestCity(unittest.TestCase):
+class TestCity_1(unittest.TestCase):
     '''
     Unittests for all cases for the City class
     '''
@@ -34,7 +34,7 @@ class TestCity(unittest.TestCase):
         self.assertNotEqual(city_1.id, base_model_2.id)
 
 
-class TestCity_args(unittest.TestCase):
+class TestCity_1_args(unittest.TestCase):
     '''
     Unittests for the different arguments made to City
     '''
@@ -62,7 +62,7 @@ class TestCity_args(unittest.TestCase):
         self.assertEqual(base_model.updated_at, dt)
 
 
-class TestCity_Public_Attributes(unittest.TestCase):
+class TestCity_1_Public_Attributes(unittest.TestCase):
     '''
     Unittests for the implementation of the public attributes of the City class
     '''
@@ -81,7 +81,7 @@ class TestCity_Public_Attributes(unittest.TestCase):
         self.assertEqual(str(base_model), expected_str)
 
 
-class TestCity_created_at(unittest.TestCase):
+class TestCity_1_created_at(unittest.TestCase):
     '''
     Unittests for the additional cases of the created_at attribute
     '''
@@ -92,7 +92,7 @@ class TestCity_created_at(unittest.TestCase):
         self.assertNotEqual(city_1.created_at, base_model_2.created_at)
 
 
-class TestCity_updated_at(unittest.TestCase):
+class TestCity_1_updated_at(unittest.TestCase):
     '''
     Unittests for the additional cases of the updated_at attribute
     '''
@@ -109,7 +109,7 @@ class TestCity_updated_at(unittest.TestCase):
         self.assertNotEqual(city_1.updated_at, base_model_2.updated_at)
 
 
-class TestCity_Public_Methods(unittest.TestCase):
+class TestCity_1_Public_Methods(unittest.TestCase):
     '''
     Unittests for the implementation of the public methods of the City class
     '''
@@ -131,7 +131,7 @@ class TestCity_Public_Methods(unittest.TestCase):
         self.assertIsInstance(base_model_dict['updated_at'], str)
 
 
-class TestCity_save(unittest.TestCase):
+class TestCity_1_save(unittest.TestCase):
     '''
     Unittests for the implementation of the save method in City
     '''
@@ -178,7 +178,7 @@ class TestCity_save(unittest.TestCase):
             city_1.save(None)
         
 
-class TestCity_to_dict(unittest.TestCase):
+class TestCity_1_to_dict(unittest.TestCase):
     '''
     Unittests for the implementation of the to_dict method in City
     '''
@@ -220,7 +220,7 @@ class TestCity_to_dict(unittest.TestCase):
             base_model.to_dict(None)
 
 
-class TestCity_Storage(unittest.TestCase):
+class TestCity_1_Storage(unittest.TestCase):
     '''
     Unittests related to storing data
     '''
