@@ -30,10 +30,12 @@ class BaseModel:
                         v = datetime.strptime(v, "%Y-%m-%dT%H:%M:%S.%f")
                     setattr(self, key, v)
         else:
+            from models import storage
+
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
-            md.storage.new(self)
+            storage.new(self)
 
     def __str__(self):
         '''
@@ -51,8 +53,11 @@ class BaseModel:
 
         Saves instances
         '''
+
+        from models import storage
+
         self.updated_at = datetime.now()
-        md.storage.save()
+        storage.save()
 
     def to_dict(self):
         '''
