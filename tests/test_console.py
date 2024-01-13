@@ -212,6 +212,7 @@ class TestHBNBCommand_create(unittest.TestCase):
         """Tests the create command with invalid syntax."""
 
         correct = "*** Unknown syntax: MyModel.create()"
+
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("MyModel.create()"))
             self.assertEqual(correct, output.getvalue().strip())
