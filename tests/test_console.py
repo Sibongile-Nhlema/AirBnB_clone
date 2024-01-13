@@ -118,6 +118,7 @@ class TestHBNBCommand_help(unittest.TestCase):
 
         text = ("Usage: count <class> or <class>.count()\n"
                 "Retrieve the number of instances of a class.")
+
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help count"))
             self.assertEqual(text, output.getvalue().strip())
