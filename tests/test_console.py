@@ -194,6 +194,7 @@ class TestHBNBCommand_create(unittest.TestCase):
         """Tests the create command without a class name."""
 
         correct = "** class name missing **"
+
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("create"))
             self.assertEqual(correct, output.getvalue().strip())
