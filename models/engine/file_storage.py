@@ -65,8 +65,10 @@ class FileStorage:
         '''
         try:
             with open(FileStorage.__file_path) as f:
-                serialized_objs = json.load(f)
-                self.__objects = [self.new(eval(obj["__class__"])
-                                  (**obj)) for obj in serialized_objs.values()]
+                serialized_objects = json.load(f)
+                for obj_id, obj_data in serialized_objects.items():
+                    class_name = obj_data['__class__']
+                    obj_instance = eval(class_name)(**obj_data)
+                    self.__dict__[obj_id] = obj_instance
         except FileNotFoundError:
             pass
