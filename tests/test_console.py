@@ -180,6 +180,7 @@ class TestHBNBCommand_create(unittest.TestCase):
 
     def tearDown(self):
         """Removes/renames the storage file."""
+
         try:
             os.remove("file.json")
         except IOError:
