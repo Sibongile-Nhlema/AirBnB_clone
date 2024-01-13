@@ -26,6 +26,7 @@ class FileStorage:
         - save(self): serializes __objects to JSON file
         - reload(self): deserializes JSON file to __objects
     '''
+
     __file_path = "file.json"
     __objects = {}
 
@@ -33,6 +34,7 @@ class FileStorage:
         '''
         Returns the dictionary private instance __objects
         '''
+
         return FileStorage.__objects
 
     def new(self, obj):
@@ -43,6 +45,7 @@ class FileStorage:
         Args:
             obj (dict): dictionary of key/value pairs
         '''
+
         key = "{}.{}".format(obj.__class__.__name__, obj.id)
         FileStorage.__objects[key] = obj
 
@@ -51,8 +54,6 @@ class FileStorage:
         Saves serializes __objects to the JSON file into __file_path
         '''
 
-        """serialized_objs = dict((obj, obj_dict[obj].to_dict())
-                               for obj in obj_dict.keys())"""
         serialized_objs = {
             key: obj.to_dict() for key, obj in FileStorage.__objects.items()
         }
@@ -66,21 +67,10 @@ class FileStorage:
         Populate the __objects dictionary with the deserialized instances.
         If the JSON file does not exist, no exception will be raised.
         '''
-        """try:
-            with open(FileStorage.__file_path) as f:
-                serialized_objs = json.load(f)
-                self.__objects = [self.new(eval(obj["__class__"])
-                                  (**obj)) for obj in serialized_objs.values()]
-        except FileNotFoundError:
-            return"""
+
         if os.path.isfile(FileStorage.__file_path):
             with open(FileStorage.__file_path, encoding="utf-8") as f:
                 serialized_objs = json.load(f)
-
-            """FileStorage.__objects = {
-                self.new(eval(obj_dict['__class__'])(**obj_dict)
-                         for obj_dict in serialized_objs.values())
-            }"""
 
             for value in serialized_objs.values():
                 class_name = value['__class__']
