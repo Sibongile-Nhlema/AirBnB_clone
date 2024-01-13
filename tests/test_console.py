@@ -95,6 +95,7 @@ class TestHBNBCommand_help(unittest.TestCase):
 
         text = ("Usage: destroy <class_name> <id>\n"
                 "Delete an instance based on the class name and id.")
+
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help destroy"))
             self.assertEqual(text, output.getvalue().strip())
