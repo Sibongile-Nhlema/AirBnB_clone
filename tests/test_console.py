@@ -336,6 +336,7 @@ class TestHBNBCommand_show(unittest.TestCase):
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("show State"))
             self.assertEqual(correct, output.getvalue().strip())
+
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("show City"))
             self.assertEqual(correct, output.getvalue().strip())
