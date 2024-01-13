@@ -73,9 +73,11 @@ class TestHBNBCommand_all(unittest.TestCase):
         pass
 
     def test_all_class_name_nonexistant_dot(self):
+        ''' Tests implementation of <class name>.all(< nonexistant id>) '''
         pass
 
     def test_all_class_name_give_dot(self):
+        ''' Tests implementation of <class name>.all(<id>) '''
         pass
 
 class TestHBNBCommand_show(unittest.TestCase):
