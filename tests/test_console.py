@@ -170,6 +170,7 @@ class TestHBNBCommand_create(unittest.TestCase):
 
     def setUp(self):
         """Renames the storage file and empties __objects."""
+
         try:
             os.rename("file.json", "temp")
         except IOError:
