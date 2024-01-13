@@ -336,7 +336,8 @@ class TestBaseModel_args(unittest.TestCase):
 
 class TestBaseModel_Public_Attributes(unittest.TestCase):
     '''
-    Unittests for the implementation of the public attributes of the BaseModel class
+    Unittests for the implementation of the public attributes
+    of the BaseModel class
     '''
     def test_created_at_instance(self):
         base_model = BaseModel()
@@ -383,7 +384,8 @@ class TestBaseModel_updated_at(unittest.TestCase):
 
 class TestBaseModel_Public_Methods(unittest.TestCase):
     '''
-    Unittests for the implementation of the public methods of the BaseModel class
+    Unittests for the implementation of the public methods
+    of the BaseModel class
     '''
     def test_save_method(self):
         base_model = BaseModel()
@@ -426,7 +428,7 @@ class TestBaseModel_save(unittest.TestCase):
             pass
 
     def test_save_once(self):
-        pass # recieved error when implemented??
+        pass  # recieved error when implemented??
 
     def test_save_twice(self):
         pass
@@ -455,7 +457,7 @@ class TestBaseModel_to_dict(unittest.TestCase):
         self.assertIn("updated_at", test_d)
 
     def test_to_dict_values(self):
-        pass # recieved error when implemented?? - check values in to_dict
+        pass  # recieved error when implemented?? - check values in to_dict
 
     def test_to_dict_results(self):
         dt = datetime.today()
