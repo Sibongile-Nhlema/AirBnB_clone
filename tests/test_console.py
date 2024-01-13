@@ -44,7 +44,7 @@ class TestHBNBCommand_prompt(unittest.TestCase):
 
 
 class TestHBNBCommand_help(unittest.TestCase):
-    """Tests help messages of the HBNB command interpreter."""
+    """Tests displayed help text for commands."""
 
     def test_help_quit(self):
         """Tests if a help message exists
