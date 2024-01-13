@@ -153,7 +153,7 @@ class TestHBNBCommand_exit(unittest.TestCase):
     """Tests quitting the HBNB command interpreter."""
 
     def test_quit(self):
-        """Tests the quit command"""
+        """Tests the quit command."""
 
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertTrue(HBNBCommand().onecmd("quit"))
