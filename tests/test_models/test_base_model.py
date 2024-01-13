@@ -404,42 +404,6 @@ class TestBaseModel_Public_Methods(unittest.TestCase):
         self.assertIn('updated_at', base_model_dict)
         self.assertIsInstance(base_model_dict['updated_at'], str)
 
-
-class TestBaseModel_save(unittest.TestCase):
-    '''
-    Unittests for the implementation of the save method in BaseModel
-    '''
-    @classmethod
-    def setUp(self):
-        try:
-            os.rename("file.json", "tmp")
-        except IOError:
-            pass
-
-    @classmethod
-    def tearDown(self):
-        try:
-            os.remove("file.json")
-        except IOError:
-            pass
-        try:
-            os.rename("tmp", "file.json")
-        except IOError:
-            pass
-
-    def test_save_once(self):
-        pass  # recieved error when implemented??
-
-    def test_save_twice(self):
-        pass
-
-    def test_save_thrice(self):
-        pass
-
-    def test_save_None(self):
-        pass
-
-
 class TestBaseModel_to_dict(unittest.TestCase):
     '''
     Unittests for the implementation of the to_dict method in BaseModel
