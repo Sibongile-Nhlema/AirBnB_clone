@@ -23,7 +23,7 @@ from time import sleep
 from uuid import uuid4
 import re
 import os
-import models
+from models import storage
 
 
 class TestBaseModel(unittest.TestCase):
@@ -483,7 +483,7 @@ class TestBaseModel_Storage(unittest.TestCase):
     Unittests related to storing data
     '''
     def test__new_instance_stored(self):
-        self.assertIn(BaseModel(), models.storage.all().values())
+        self.assertIn(BaseModel(), storage.all().values())
 
 
 if __name__ == '__main__':
