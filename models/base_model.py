@@ -2,7 +2,7 @@
 ''' This is the module for the BaseModel Class '''
 
 import uuid
-from models import storage
+import models as md
 from datetime import datetime
 
 
