@@ -64,5 +64,18 @@ class TestPlace(unittest.TestCase):
             self.assertEqual(type(getattr(place, key, None)), value)
 
 
+class TestDocumentation(unittest.TestCase):
+    """Tests for existence of docstrings"""
+
+    def test_documentation(self):
+        """Tests if the module, the class,
+        and the methods are documented"""
+
+        from models import place
+
+        self.assertIsNotNone(place.__doc__)
+        self.assertIsNotNone(Place.__doc__)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -28,6 +28,7 @@ def is_float(string):
     else:
         return False
 
+
 def remove_quotes(string):
     """
     Removes quotes surrounding a string.
@@ -46,6 +47,7 @@ def remove_quotes(string):
             string = string.split("'")[1].strip()
 
     return string
+
 
 class HBNBCommand(cmd.Cmd):
     """
@@ -426,7 +428,7 @@ class HBNBCommand(cmd.Cmd):
                                 not isinstance(attr_value, int)
                                 and not isinstance(attr_value, float)
                                 and attr_value.isdigit()
-                            ):
+                                ):
                             attr_value = int(attr_value)
                         elif (
                                 not isinstance(attr_value, int)
@@ -466,7 +468,9 @@ class HBNBCommand(cmd.Cmd):
 
         methods = ['all', 'count', 'show', 'destroy', 'update']
 
-        match_line = re.match(r"^(.+)\.(.+)\(([^,]+)?,?\s?(\{.+\}|[^,]+)?,?\s?(.+)?\)$", line)
+        match_line = re.match(
+            r"^(.+)\.(.+)\(([^,]+)?,?\s?(\{.+\}|[^,]+)?,?\s?(.+)?\)$", line
+            )
 
         if not match_line:
             match_all = re.match(r"^\.all\(\)$", line)
@@ -503,7 +507,9 @@ class HBNBCommand(cmd.Cmd):
                     dictionary = ast.literal_eval(attr_name)
                     self.dictionary_update(line, instance_id, dictionary)
                 else:
-                    self.dot_notation_update(line, instance_id, attr_name, attr_value)
+                    self.dot_notation_update(
+                        line, instance_id, attr_name, attr_value
+                        )
             else:
                 print(f"*** Unknown syntax: {line}.{match_line.group(2)}()")
 
