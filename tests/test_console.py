@@ -324,6 +324,7 @@ class TestHBNBCommand_show(unittest.TestCase):
         """Tests the show command without an id."""
 
         correct = "** instance id missing **"
+
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("show BaseModel"))
             self.assertEqual(correct, output.getvalue().strip())
