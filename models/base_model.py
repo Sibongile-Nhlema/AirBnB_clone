@@ -23,7 +23,6 @@ class BaseModel:
             args (any) - Unused
             kwargs (dict) - Key/Value arguments
         '''
-        self.updated_at = datetime.now()
         if kwargs:
             for key, value in kwargs.items():
                 if key != "__class__":
@@ -31,9 +30,12 @@ class BaseModel:
                         value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
                     setattr(self, key, value)
         else:
+            from models import storage
+
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
-            md.storage.new(self)
+            self.updated_at = datetime.now()
+            storage.new(self)
 
     def __str__(self):
         '''
@@ -51,8 +53,11 @@ class BaseModel:
 
         Saves instances
         '''
+
+        from models import storage
+
         self.updated_at = datetime.now()
-        md.storage.save()
+        storage.save()
 
     def to_dict(self):
         '''
