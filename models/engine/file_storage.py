@@ -69,4 +69,4 @@ class FileStorage:
                 self.__objects = [self.new(eval(obj["__class__"])
                                   (**obj)) for obj in serialized_objs.values()]
         except FileNotFoundError:
-            return
+            pass
