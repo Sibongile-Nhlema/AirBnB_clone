@@ -63,6 +63,7 @@ class TestHBNBCommand_help(unittest.TestCase):
 
         text = ("Usage: create <class_name>\n"
                 "Create a new instance of a class")
+
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help create"))
             self.assertEqual(text, output.getvalue().strip())
