@@ -175,6 +175,7 @@ class TestHBNBCommand_create(unittest.TestCase):
             os.rename("file.json", "temp")
         except IOError:
             pass
+
         FileStorage.__objects = {}
 
     def tearDown(self):
