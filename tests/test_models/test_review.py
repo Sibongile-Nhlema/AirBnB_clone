@@ -56,5 +56,18 @@ class TestReview(unittest.TestCase):
             self.assertEqual(type(getattr(review, key, None)), value)
 
 
+class TestDocumentation(unittest.TestCase):
+    """Tests for existence of docstrings"""
+
+    def test_documentation(self):
+        """Tests if the module, the class,
+        and the methods are documented"""
+
+        from models import review
+
+        self.assertIsNotNone(review.__doc__)
+        self.assertIsNotNone(Review.__doc__)
+
+
 if __name__ == "__main__":
     unittest.main()

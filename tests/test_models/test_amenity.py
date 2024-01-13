@@ -50,5 +50,18 @@ class TestAmenity(unittest.TestCase):
         self.assertEqual(type(getattr(amenity, 'name', None)), str)
 
 
+class TestDocumentation(unittest.TestCase):
+    """Tests for existence of docstrings"""
+
+    def test_documentation(self):
+        """Tests if the module, the class,
+        and the methods are documented"""
+
+        from models import amenity
+
+        self.assertIsNotNone(amenity.__doc__)
+        self.assertIsNotNone(Amenity.__doc__)
+
+
 if __name__ == "__main__":
     unittest.main()

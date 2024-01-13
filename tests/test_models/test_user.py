@@ -57,5 +57,18 @@ class TestUser(unittest.TestCase):
             self.assertEqual(type(getattr(user, key, None)), value)
 
 
+class TestDocumentation(unittest.TestCase):
+    """Tests for existence of docstrings"""
+
+    def test_documentation(self):
+        """Tests if the module, the class,
+        and the methods are documented"""
+
+        from models import user
+
+        self.assertIsNotNone(user.__doc__)
+        self.assertIsNotNone(User.__doc__)
+
+
 if __name__ == "__main__":
     unittest.main()
