@@ -23,16 +23,16 @@ class BaseModel:
             args (any) - Unused
             kwargs (dict) - Key/Value arguments
         '''
+        self.updated_at = datetime.now()
         if kwargs:
-            for key, v in kwargs.items():
+            for key, value in kwargs.items():
                 if key != "__class__":
                     if key == "created_at" or key == "updated_at":
-                        v = datetime.strptime(v, "%Y-%m-%dT%H:%M:%S.%f")
-                    setattr(self, key, v)
+                        value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                    setattr(self, key, value)
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
-            self.updated_at = datetime.now()
             md.storage.new(self)
 
     def __str__(self):
