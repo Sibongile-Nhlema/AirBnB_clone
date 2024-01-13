@@ -107,6 +107,7 @@ class TestHBNBCommand_help(unittest.TestCase):
         text = ("Usage: all <class_name>\n"
                 "Usage: all\n"
                 "Print string representation of all instances.")
+
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help all"))
             self.assertEqual(text, output.getvalue().strip())
