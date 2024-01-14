@@ -20,7 +20,6 @@ class FileStorage:
         - save(self): serializes __objects to JSON file
         - reload(self): deserializes JSON file to __objects
     '''
-
     __file_path = "file.json"
     __objects = {}
 
