@@ -60,7 +60,6 @@ class FileStorage:
         if os.path.isfile(FileStorage.__file_path):
             with open(FileStorage.__file_path, encoding="utf-8") as f:
                 serialized_objs = json.load(f)
-
             for value in serialized_objs.values():
                 class_name = value['__class__']
                 obj = globals()[class_name](**value)
