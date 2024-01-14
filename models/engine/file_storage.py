@@ -69,11 +69,9 @@ class FileStorage:
 
         from models.base_model import BaseModel
 
-        if not os.path.isfile(FileStorage.__file_path):
-            return
-
-        with open(FileStorage.__file_path, encoding="utf-8") as f:
-            serialized_objs = json.load(f)
+        if os.path.isfile(FileStorage.__file_path):
+            with open(FileStorage.__file_path, encoding="utf-8") as f:
+                serialized_objs = json.load(f)
 
             for key, obj_dict in serialized_objs.items():
                 class_name = obj_dict['__class__']
