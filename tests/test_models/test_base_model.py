@@ -7,7 +7,6 @@ Classes:
 - TestStr
 - TestSave
 - TestToDict
-
 - TestBaseModel_args
 - TestBaseModel_Public_Attributes
 - TestBaseModel_created_at
