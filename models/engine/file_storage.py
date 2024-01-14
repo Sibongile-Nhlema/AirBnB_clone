@@ -28,7 +28,6 @@ class FileStorage:
         '''
         Returns the dictionary private instance __objects
         '''
-
         return FileStorage.__objects
 
     def new(self, obj):
@@ -39,7 +38,6 @@ class FileStorage:
         Args:
             obj (dict): dictionary of key/value pairs
         '''
-
         key = "{}.{}".format(obj.__class__.__name__, obj.id)
         FileStorage.__objects[key] = obj
 
@@ -47,7 +45,6 @@ class FileStorage:
         '''
         Saves serializes __objects to the JSON file into __file_path
         '''
-
         serialized_objs = {
             key: obj.to_dict() for key, obj in FileStorage.__objects.items()
         }
@@ -61,7 +58,6 @@ class FileStorage:
         Populate the __objects dictionary with the deserialized instances.
         If the JSON file does not exist, no exception will be raised.
         '''
-
         if os.path.isfile(FileStorage.__file_path):
             with open(FileStorage.__file_path, encoding="utf-8") as f:
                 serialized_objs = json.load(f)
