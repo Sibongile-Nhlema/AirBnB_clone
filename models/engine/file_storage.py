@@ -3,6 +3,13 @@
 
 import os
 import json
+from models.base_model import BaseModel
+from models.city import City
+from models.user import User
+from models.state import State
+from models.place import Place
+from models.review import Review
+from models.amenity import Amenity
 
 
 class FileStorage:
@@ -19,7 +26,6 @@ class FileStorage:
         - save(self): serializes __objects to JSON file
         - reload(self): deserializes JSON file to __objects
     '''
-
     __file_path = "file.json"
     __objects = {}
 
@@ -27,9 +33,6 @@ class FileStorage:
         '''
         Returns the dictionary private instance __objects
         '''
-
-        from models.base_model import BaseModel
-
         return FileStorage.__objects
 
     def new(self, obj):
@@ -40,9 +43,6 @@ class FileStorage:
         Args:
             obj (dict): dictionary of key/value pairs
         '''
-
-        from models.base_model import BaseModel
-
         key = "{}.{}".format(obj.__class__.__name__, obj.id)
         FileStorage.__objects[key] = obj
 
@@ -50,9 +50,6 @@ class FileStorage:
         '''
         Saves serializes __objects to the JSON file into __file_path
         '''
-
-        from models.base_model import BaseModel
-
         serialized_objs = {
             key: obj.to_dict() for key, obj in FileStorage.__objects.items()
         }
@@ -66,13 +63,10 @@ class FileStorage:
         Populate the __objects dictionary with the deserialized instances.
         If the JSON file does not exist, no exception will be raised.
         '''
-
-        from models.base_model import BaseModel
-
         if os.path.isfile(FileStorage.__file_path):
             with open(FileStorage.__file_path, encoding="utf-8") as f:
                 serialized_objs = json.load(f)
-
-            for key, obj_dict in serialized_objs.items():
-                class_name = obj_dict['__class__']
-                FileStorage.__objects[key] = eval(class_name)(**obj_dict)
+            for value in serialized_objs.values():
+                class_name = value['__class__']
+                obj = globals()[class_name](**value)
+                self.new(obj)
