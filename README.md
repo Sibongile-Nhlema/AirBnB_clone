@@ -1,6 +1,4 @@
-# AirBnB Clone - The Console
-
-## AirBnB Clone
+# AirBnB Clone
 
 This is a simple copy of the AirBnB website. It includes some of its features,
 not all of them.
