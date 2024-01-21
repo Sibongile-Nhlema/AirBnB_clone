@@ -43,6 +43,13 @@ article h2 {
     padding: 10px;
 }
 
+@media (max-width: 768px) {
+    .container .places article .price_by_night {
+        padding: 0;
+        font-size: 20px;
+        
+    }
+}
 .max_guest,
 .number_rooms,
 .number_bathrooms {

@@ -23,6 +23,17 @@
 .filters button:hover {
     opacity: 0.9;
 }
+@media (max-width: 768px) {
+.filters .locations ul li h2 {
+    margin-left: -10px;
+}
+.filters .amenities ul li{
+    margin-left: -10px;
+}
+.popover {
+    padding: 10px 0;
+}
+}
 
  /*task 5*/
 .container .filters .locations,
