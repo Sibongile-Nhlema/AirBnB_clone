@@ -72,7 +72,7 @@
     margin-left: 40px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 720px) {
 .filters .locations ul li h2 {
     margin-left: 10px;
     font-size: 14px;
@@ -91,7 +91,7 @@
 .container .filters .amenities h4,
 .container .filters .locations h4 {
     margin-left: 5px;
-    margin-bottom: 0;
+    margin-bottom: 0px;
 }
 .popover {
     padding: 10px 0;
