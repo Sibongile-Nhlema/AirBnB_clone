@@ -11,3 +11,9 @@ header {
         width: 140px;
         height: 65px;
 }
+@media (max-width: 768px) {
+        .hbtn_logo {
+        padding-left: 20px;
+        background-size: 80%;
+}
+}

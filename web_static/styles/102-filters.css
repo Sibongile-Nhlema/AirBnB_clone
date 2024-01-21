@@ -23,17 +23,6 @@
 .filters button:hover {
     opacity: 0.9;
 }
-@media (max-width: 768px) {
-.filters .locations ul li h2 {
-    margin-left: -10px;
-}
-.filters .amenities ul li{
-    margin-left: -10px;
-}
-.popover {
-    padding: 10px 0;
-}
-}
 
  /*task 5*/
 .container .filters .locations,
@@ -81,4 +70,30 @@
 
 .filters .amenities ul li{
     margin-left: 40px;
+}
+
+@media (max-width: 768px) {
+.filters .locations ul li h2 {
+    margin-left: 10px;
+    font-size: 14px;
+}
+.filters .locations ul li ul {
+    padding-left: 8px;
+}
+.filters .amenities ul li{
+    margin-left: 10px;
+}
+.container .filters .amenities h3,
+.container .filters .locations h3 {
+    margin-left: 5px;
+
+}
+.container .filters .amenities h4,
+.container .filters .locations h4 {
+    margin-left: 5px;
+    margin-bottom: 0;
+}
+.popover {
+    padding: 10px 0;
+}
 }

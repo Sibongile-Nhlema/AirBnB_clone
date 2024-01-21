@@ -47,8 +47,11 @@ article h2 {
     .container .places article .price_by_night {
         padding: 0;
         font-size: 20px;
-        
     }
+    article h2 {
+    font-size: 25px;
+    }
+
 }
 .max_guest,
 .number_rooms,
