@@ -96,6 +96,10 @@ article h2 {
  .pets_icon {
     background-image: url("../images/icon_pets.png");
  }
+ .places .amenities h2 {
+    font-size: 16px;
+    text-align: left;
+ }
  article .places .amenities {
     background-color: tan;
     width: 100%;
