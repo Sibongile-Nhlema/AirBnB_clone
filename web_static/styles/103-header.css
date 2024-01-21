@@ -1,0 +1,13 @@
+.hbtn_logo {
+        background-image: url("../images/hbtn-airbnb-logo.png");
+        padding-left: 30px;
+        background-repeat: no-repeat;
+        width: 140px;
+        height: 65px;
+}
+@media (max-width: 768px) {
+        .hbtn_logo {
+        padding-left: 20px;
+        background-size: 80%;
+}
+}
