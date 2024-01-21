@@ -4,9 +4,9 @@ header {
         width: 100%;
         border-bottom: solid 1px #CCCCCC;
 }
-header .hbtn_logo {
-        background-image: url("../images/full_icon.png");
-        padding-left: 20px;
+.hbtn_logo {
+        background-image: url("../images/hbtn-airbnb-logo.png");
+        padding-left: 30px;
         background-repeat: no-repeat;
         width: 140px;
         height: 65px;
