@@ -25,7 +25,8 @@
 }
 
  /*task 5*/
-.container section div {
+.container section .locations,
+.container section .amenities {
     height: 100%;
     width: 25%;
     text-align: left;
