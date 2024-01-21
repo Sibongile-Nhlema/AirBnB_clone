@@ -99,13 +99,17 @@ article h2 {
  .pets_icon {
     background-image: url("../images/icon_pets.png");
  }
- .places .amenities h2 {
+ .places .amenities h2,
+ .places .reviews h2 {
     font-size: 16px;
     text-align: left;
     padding-bottom: 10px;
     border-bottom: solid 1px #DDDDDD;
  }
-
+.places .amenities,
+.places .reviews {
+    margin-top: 40px;
+}
  .places .amenities .amenities_box {
     display: flex;
  }
@@ -119,4 +123,21 @@ article h2 {
 .places .amenities p {
     margin-left: -5px;
     margin-top: 10px;
+}
+/*reviews*/
+.reviews .list_of_reviews ul {
+    list-style: none;
+    text-align: left;
+}
+.list_of_reviews {
+    margin-left: -40px;
+    margin-top: -50px;
+}
+.reviews h3 {
+    font-size: 14px;
+    margin-bottom: 0;
+}
+.reviews p {
+    margin-top: 0;
+    font-size: 12px;
 }
