@@ -84,8 +84,11 @@ article h2 {
  .wifi_icon,
  .pets_icon {
     background-repeat: no-repeat;
+    background-size: 60%;
     width: 50px;
     height: 50px;
+    font-size: 16px;
+
  }
  .tv_icon {
     background-image: url("../images/icon_tv.png");
@@ -99,8 +102,21 @@ article h2 {
  .places .amenities h2 {
     font-size: 16px;
     text-align: left;
+    padding-bottom: 10px;
+    border-bottom: solid 1px #DDDDDD;
  }
- article .places .amenities {
-    background-color: tan;
-    width: 100%;
+
+ .places .amenities .amenities_box {
+    display: flex;
  }
+.places .amenities ul {
+    list-style: none;
+}
+.places .amenities_list {
+    margin-top: -50px;
+    margin-left: -45px;
+}
+.places .amenities p {
+    margin-left: -5px;
+    margin-top: 10px;
+}

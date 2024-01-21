@@ -26,7 +26,7 @@
 
  /*task 5*/
 .container .filters .locations,
-.container section .amenities {
+.container .filters .amenities {
     height: 100%;
     width: 25%;
     text-align: left;
@@ -63,11 +63,11 @@
     display: block;
 }
 
-.locations ul li h2 {
+.filters .locations ul li h2 {
     margin-left: 20px;
     margin-bottom: 0;
 }
 
-.amenities ul li{
+.filters .amenities ul li{
     margin-left: 40px;
 }
