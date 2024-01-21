@@ -30,7 +30,7 @@
     width: 25%;
     text-align: left;
 }
-.container section div:first-of-type {
+.container section .locations {
     border-right: 1px solid #DDDDDD;
 }
 .container section div h3 { 

@@ -10,7 +10,7 @@
     border: solid 1px #FF5A5F;
     border-radius: 4px;
 }
-.places div {
+.places .article_container {
     display:flex;
     flex-wrap: wrap;
     justify-content: center;
